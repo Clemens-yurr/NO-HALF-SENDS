@@ -17,7 +17,7 @@ public class NoHalfSendsApp extends GameApplication {
     @Override
     protected void initGame() {
         super.initGame();
-        FXGL.setLevelFromMap("Finnland_MK3.tmx");
+        FXGL.setLevelFromMap("Test_MK1.tmx");
     }
 
 
