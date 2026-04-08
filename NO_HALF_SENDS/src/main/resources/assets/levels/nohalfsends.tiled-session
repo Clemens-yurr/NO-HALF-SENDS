@@ -1,0 +1,117 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Test_MK6.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Grass_Tile.tsx": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "Grass_Tile_02.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "Road_Main_Straight.tsx": {
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "Road_Main_Straight_02.tsx": {
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "Test_MK2.tmx": {
+            "scale": 0.0625,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 5680,
+                "y": 5192
+            }
+        },
+        "Test_MK2.tmx#Grass_Tile": {
+            "scaleInDock": 1
+        },
+        "Test_MK2.tmx#Road_Main_Straight": {
+            "scaleInDock": 0.33
+        },
+        "Test_MK3.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 136,
+                "y": 373
+            }
+        },
+        "Test_MK4.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 640,
+                "y": 966
+            }
+        },
+        "Test_MK4.tmx#Grass_Tile": {
+            "scaleInDock": 0.33
+        },
+        "Test_MK5.tmx": {
+            "scale": 0.03125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 10144,
+                "y": -720
+            }
+        },
+        "Test_MK5.tmx#Grass_Tile": {
+            "scaleInDock": 1
+        },
+        "Test_MK6.tmx": {
+            "scale": 0.015625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 5120,
+                "y": 5984
+            }
+        },
+        "Test_MK6.tmx#Road_Main_Straight_02": {
+            "scaleInDock": 1
+        }
+    },
+    "last.imagePath": "C:/Users/deuti/Desktop/NO_HALF_SENDS/NO-HALF-SENDS/NO_HALF_SENDS/src/main/resources/assets/levels",
+    "map.height": 30,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 512,
+    "map.tileWidth": 512,
+    "map.width": 30,
+    "openFiles": [
+        "Test_MK2.tmx",
+        "Road_Main_Straight.tsx",
+        "Test_MK6.tmx",
+        "Road_Main_Straight_02.tsx"
+    ],
+    "project": "nohalfsends.tiled-project",
+    "recentFiles": [
+        "Test_MK2.tmx",
+        "Road_Main_Straight.tsx",
+        "Road_Main_Straight_02.tsx",
+        "Test_MK6.tmx",
+        "Test_MK4.tmx",
+        "Test_MK5.tmx",
+        "Grass_Tile.tsx",
+        "Test_MK3.tmx",
+        "Grass_Tile_02.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 512,
+        "width": 512
+    }
+}
