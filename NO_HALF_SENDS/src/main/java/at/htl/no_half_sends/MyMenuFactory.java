@@ -1,11 +1,13 @@
-package at.htl.no_half_sends;
-
 import com.almasb.fxgl.app.scene.FXGLMenu;
-import com.almasb.fxgl.app.scene.SceneFactory;
+import com.almasb.fxgl.app.scene.MenuType;
 
-public class MyMenuFactory extends SceneFactory {
-    @Override
-    public FXGLMenu newMainMenu() {
-        return new DriftMainMenu();
+public class MYMenuFactory extends FXGLMenu {
+    public MYMenuFactory(MenuType type) {
+        super(type);
+
+        // code to customize the view of your menu
+        getContentRoot().getChildren().addAll(
+
+        );
     }
 }
