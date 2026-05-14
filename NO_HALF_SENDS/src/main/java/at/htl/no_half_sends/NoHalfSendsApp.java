@@ -28,6 +28,7 @@ public class NoHalfSendsApp extends GameApplication {
         gameSettings.setFullScreenAllowed(true);
         gameSettings.setFullScreenFromStart(true);
         gameSettings.setDeveloperMenuEnabled(true);
+        gameSettings.setMainMenuEnabled(true);
     }
 
     @Override
@@ -39,18 +40,36 @@ public class NoHalfSendsApp extends GameApplication {
     @Override
     protected void initInput() {
         getInput().addAction(new UserAction("Gas geben") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).up = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).up = false; }
+            @Override
+            protected void onAction() {
+                player.getComponent(DriftCarComponent.class).up = true;
+            }
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(DriftCarComponent.class).up = false;
+            }
         }, KeyCode.W);
 
         getInput().addAction(new UserAction("Bremsen / Rückwärts") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).down = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).down = false; }
+            @Override
+            protected void onAction() {
+                player.getComponent(DriftCarComponent.class).down = true;
+            }
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(DriftCarComponent.class).down = false;
+            }
         }, KeyCode.S);
 
         getInput().addAction(new UserAction("Links lenken") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).left = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).left = false; }
+            @Override
+            protected void onAction() {
+                player.getComponent(DriftCarComponent.class).left = true;
+            }
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(DriftCarComponent.class).left = false;
+            }
         }, KeyCode.A);
 
         getInput().addAction(new UserAction("Rechts lenken") {
@@ -64,7 +83,7 @@ public class NoHalfSendsApp extends GameApplication {
         setLevelFromMap("Test_MK9.tmx");
 
         player = entityBuilder()
-                .at(1150, 400)
+                .at(490, 570)
                 .viewWithBBox("Nissan_GTR_R35_mk2.png")
                 .with(new CollidableComponent(true))
                 .with(new DriftCarComponent())
@@ -75,7 +94,7 @@ public class NoHalfSendsApp extends GameApplication {
         player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2));
 
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
-        getGameScene().getViewport().setBounds(0, 0, 4000, 4000);
+        getGameScene().getViewport().setBounds(0, 0, 1920, 1080);
 
         getGameScene().getViewport().setZoom(10);
     }
@@ -113,12 +132,18 @@ public class NoHalfSendsApp extends GameApplication {
     // =========================================================================================
     public static class DriftCarComponent extends Component {
 
-        // --- REALISTIC TUNED NISSAN GT-R R35 SPECS ---
-        private double acceleration = 450;  // Realistischer Schub, kein Arcade-Raketenantrieb
-        private double maxSpeed = 3300;     // 330 km/h
+        // --- PHYSIK (ECHTE BEWEGUNG) ---
+        // Diese Werte senken wir, damit das Auto langsamer über den Schirm fährt
+        private double acceleration = 200;  // Vorher 450 -> Auto beschleunigt physisch langsamer
+        private double maxSpeed = 1500;     // Vorher 3300 -> Die physikalische Grenze auf dem Bildschirm
         private double turnSpeed = 260;
-        private double drag = 0.998;        // Fast kein Rollwiderstand, erzeugt die perfekte Asymptoten-Kurve
+        private double drag = 0.998;
         private double lateralGrip = 0.90;
+
+        // --- VISUAL SCALING ---
+        // Damit die Anzeige trotzdem 330 km/h erreicht, brauchen wir einen Multiplikator.
+        // 1500 (maxSpeed) * 2.2 = 3300 -> / 10 = 330 km/h
+        private double displayMultiplier = 2.2;
 
         private Point2D velocity = Point2D.ZERO;
         public boolean up, down, left, right;
@@ -126,45 +151,40 @@ public class NoHalfSendsApp extends GameApplication {
         @Override
         public void onUpdate(double tpf) {
             double rotation = entity.getRotation();
-
             Point2D forwardDir = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
 
             if (up) {
                 velocity = velocity.add(forwardDir.multiply(acceleration * tpf));
             }
             if (down) {
-                // Carbon-Keramik-Bremsen! Da der Basis-Schub (450) jetzt kleiner ist,
-                // multiplizieren wir die Bremse mit 4.0, damit das Auto stark verzögert.
                 velocity = velocity.subtract(forwardDir.multiply(acceleration * 4.0 * tpf));
             }
 
             double currentSpeed = velocity.magnitude();
 
-            set("speed", (int)(currentSpeed / 10));
+            // --- HIER IST DIE MAGIE ---
+            // Wir multiplizieren die echte Geschwindigkeit für die Anzeige künstlich hoch.
+            int fakeKmh = (int)((currentSpeed * displayMultiplier) / 10);
+            set("speed", fakeKmh);
+
+            // ... Rest deiner Logik (Turning, Lateral Grip, etc.) ...
 
             if (currentSpeed > 10) {
                 double turning = turnSpeed * tpf;
-
-                if (velocity.normalize().dotProduct(forwardDir) < 0) {
-                    turning = -turning;
-                }
-
+                if (velocity.normalize().dotProduct(forwardDir) < 0) turning = -turning;
                 if (left) entity.rotateBy(-turning);
                 if (right) entity.rotateBy(turning);
             }
 
             rotation = entity.getRotation();
-
             Point2D newForward = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
             Point2D rightDir = new Point2D(-newForward.getY(), newForward.getX());
 
             double forwardVelocity = velocity.dotProduct(newForward);
             double lateralVelocity = velocity.dotProduct(rightDir);
-
             lateralVelocity *= Math.pow(lateralGrip, tpf * 60);
 
             velocity = newForward.multiply(forwardVelocity).add(rightDir.multiply(lateralVelocity));
-
             velocity = velocity.multiply(Math.pow(drag, tpf * 60));
 
             if (velocity.magnitude() > maxSpeed) {
@@ -173,16 +193,19 @@ public class NoHalfSendsApp extends GameApplication {
 
             entity.translate(velocity.multiply(tpf));
 
-            calculateDriftScore(tpf, currentSpeed, newForward);
+            // WICHTIG: Beim Drift-Score auch den Multiplikator nutzen,
+            // damit die Punktevergabe zum visuellen Speed passt.
+            calculateDriftScore(tpf, currentSpeed * displayMultiplier, newForward);
         }
 
-        private void calculateDriftScore(double tpf, double currentSpeed, Point2D forwardDir) {
-            if (currentSpeed > 200) {
+        private void calculateDriftScore(double tpf, double visualSpeed, Point2D forwardDir) {
+            if (visualSpeed > 200) {
                 Point2D moveDir = velocity.normalize();
                 double angleDiff = Math.abs(moveDir.angle(forwardDir));
 
                 if (angleDiff > 15 && angleDiff < 160) {
-                    int pointsEarned = (int) (angleDiff * (currentSpeed / 100.0) * tpf * 5);
+                    // Nutzt jetzt die visualSpeed für die Punkte
+                    int pointsEarned = (int) (angleDiff * (visualSpeed / 100.0) * tpf * 5);
                     inc("driftScore", pointsEarned);
                 }
             }
