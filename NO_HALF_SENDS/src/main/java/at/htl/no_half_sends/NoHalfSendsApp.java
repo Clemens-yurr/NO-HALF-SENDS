@@ -1,9 +1,15 @@
 package at.htl.no_half_sends;
 
+import at.htl.no_half_sends.components.DriftCarComponent;
+import at.htl.no_half_sends.data.PlayerProfile;
+import at.htl.no_half_sends.data.ProfileManager;
+import at.htl.no_half_sends.ui.DriftMainMenu;
+
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.scene.FXGLMenu;
+import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.input.UserAction;
 import javafx.geometry.Point2D;
@@ -19,6 +25,8 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class NoHalfSendsApp extends GameApplication {
 
     private Entity player;
+    private ProfileManager profileManager;
+    private PlayerProfile currentProfile;
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -29,64 +37,77 @@ public class NoHalfSendsApp extends GameApplication {
         gameSettings.setFullScreenFromStart(true);
         gameSettings.setDeveloperMenuEnabled(true);
         gameSettings.setMainMenuEnabled(true);
+
+        // Hier überschreiben wir das Hauptmenü UND das Pause-Menü!
+        gameSettings.setSceneFactory(new SceneFactory() {
+            @Override
+            public FXGLMenu newMainMenu() {
+                return new DriftMainMenu();
+            }
+
+            // Das überschreibt das hässliche FXGL Menü im Spiel (wenn man ESC drückt)
+            // Wir nutzen der Einfachheit halber fürs Erste einfach dein MainMenu dafür,
+            // damit das Standard-Menü komplett weg ist!
+            @Override
+            public FXGLMenu newGameMenu() {
+                return new DriftMainMenu();
+            }
+        });
+    }
+
+    @Override
+    protected void onPreInit() {
+        // Lade den Speicherstand BEVOR das Spiel startet
+        profileManager = new ProfileManager();
+        currentProfile = profileManager.loadProfile();
     }
 
     @Override
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("driftScore", 0);
         vars.put("speed", 0);
+        // Wir setzen das Cash aus der JSON-Datei als Spiel-Variable
+        vars.put("cash", currentProfile.cash);
     }
 
     @Override
     protected void initInput() {
         getInput().addAction(new UserAction("Gas geben") {
-            @Override
-            protected void onAction() {
-                player.getComponent(DriftCarComponent.class).up = true;
-            }
-            @Override
-            protected void onActionEnd() {
-                player.getComponent(DriftCarComponent.class).up = false;
-            }
+            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).up = true; }
+            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).up = false; }
         }, KeyCode.W);
 
         getInput().addAction(new UserAction("Bremsen / Rückwärts") {
-            @Override
-            protected void onAction() {
-                player.getComponent(DriftCarComponent.class).down = true;
-            }
-            @Override
-            protected void onActionEnd() {
-                player.getComponent(DriftCarComponent.class).down = false;
-            }
+            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).down = true; }
+            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).down = false; }
         }, KeyCode.S);
 
         getInput().addAction(new UserAction("Links lenken") {
-            @Override
-            protected void onAction() {
-                player.getComponent(DriftCarComponent.class).left = true;
-            }
-            @Override
-            protected void onActionEnd() {
-                player.getComponent(DriftCarComponent.class).left = false;
-            }
+            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).left = true; }
+            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).left = false; }
         }, KeyCode.A);
 
         getInput().addAction(new UserAction("Rechts lenken") {
             @Override protected void onAction() { player.getComponent(DriftCarComponent.class).right = true; }
             @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).right = false; }
         }, KeyCode.D);
+
+        // Speicher-Button (Optional, z.B. wenn man das Auto gewechselt hat)
+        getInput().addAction(new UserAction("Speichern") {
+            @Override protected void onActionBegin() { saveGameData(); }
+        }, KeyCode.F5);
     }
 
     @Override
     protected void initGame() {
         setLevelFromMap("Test_MK9.tmx");
 
+        // WICHTIG: Hier laden wir jetzt das Bild aus dem Profil und übergeben das Profil an die Physik!
         player = entityBuilder()
                 .at(490, 570)
-                .viewWithBBox("Nissan_GTR_R35_mk2.png")
+                .viewWithBBox(currentProfile.currentCar) // <- Dynamisches Auto!
                 .with(new CollidableComponent(true))
-                .with(new DriftCarComponent())
+                .with(new DriftCarComponent(currentProfile)) // <- Hier werden Upgrades geladen!
                 .scale(0.1, 0.1)
                 .rotate(90)
                 .buildAndAttach();
@@ -95,7 +116,6 @@ public class NoHalfSendsApp extends GameApplication {
 
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
         getGameScene().getViewport().setBounds(0, 0, 1920, 1080);
-
         getGameScene().getViewport().setZoom(10);
     }
 
@@ -119,96 +139,28 @@ public class NoHalfSendsApp extends GameApplication {
         speedText.setTranslateY(110);
         speedText.textProperty().bind(getip("speed").asString("KM/H: %d"));
 
+        // NEU: Cash-Anzeige im Spiel
+        Text cashText = new Text();
+        cashText.setFont(Font.font("Arial", 48));
+        cashText.setFill(Color.LIGHTGREEN);
+        cashText.setStroke(Color.BLACK);
+        cashText.setStrokeWidth(2);
+        cashText.setTranslateX(20);
+        cashText.setTranslateY(170);
+        cashText.textProperty().bind(getip("cash").asString("CASH: $%d"));
+
         addUINode(scoreText);
         addUINode(speedText);
+        addUINode(cashText);
+    }
+
+    // Hilfsmethode zum Speichern des Geldes
+    public void saveGameData() {
+        currentProfile.cash = geti("cash");
+        profileManager.saveProfile(currentProfile);
     }
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    // =========================================================================================
-    // DRIFT PHYSIK COMPONENT
-    // =========================================================================================
-    public static class DriftCarComponent extends Component {
-
-        // --- PHYSIK (ECHTE BEWEGUNG) ---
-        // Diese Werte senken wir, damit das Auto langsamer über den Schirm fährt
-        private double acceleration = 200;  // Vorher 450 -> Auto beschleunigt physisch langsamer
-        private double maxSpeed = 1500;     // Vorher 3300 -> Die physikalische Grenze auf dem Bildschirm
-        private double turnSpeed = 260;
-        private double drag = 0.998;
-        private double lateralGrip = 0.90;
-
-        // --- VISUAL SCALING ---
-        // Damit die Anzeige trotzdem 330 km/h erreicht, brauchen wir einen Multiplikator.
-        // 1500 (maxSpeed) * 2.2 = 3300 -> / 10 = 330 km/h
-        private double displayMultiplier = 2.2;
-
-        private Point2D velocity = Point2D.ZERO;
-        public boolean up, down, left, right;
-
-        @Override
-        public void onUpdate(double tpf) {
-            double rotation = entity.getRotation();
-            Point2D forwardDir = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
-
-            if (up) {
-                velocity = velocity.add(forwardDir.multiply(acceleration * tpf));
-            }
-            if (down) {
-                velocity = velocity.subtract(forwardDir.multiply(acceleration * 4.0 * tpf));
-            }
-
-            double currentSpeed = velocity.magnitude();
-
-            // --- HIER IST DIE MAGIE ---
-            // Wir multiplizieren die echte Geschwindigkeit für die Anzeige künstlich hoch.
-            int fakeKmh = (int)((currentSpeed * displayMultiplier) / 10);
-            set("speed", fakeKmh);
-
-            // ... Rest deiner Logik (Turning, Lateral Grip, etc.) ...
-
-            if (currentSpeed > 10) {
-                double turning = turnSpeed * tpf;
-                if (velocity.normalize().dotProduct(forwardDir) < 0) turning = -turning;
-                if (left) entity.rotateBy(-turning);
-                if (right) entity.rotateBy(turning);
-            }
-
-            rotation = entity.getRotation();
-            Point2D newForward = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
-            Point2D rightDir = new Point2D(-newForward.getY(), newForward.getX());
-
-            double forwardVelocity = velocity.dotProduct(newForward);
-            double lateralVelocity = velocity.dotProduct(rightDir);
-            lateralVelocity *= Math.pow(lateralGrip, tpf * 60);
-
-            velocity = newForward.multiply(forwardVelocity).add(rightDir.multiply(lateralVelocity));
-            velocity = velocity.multiply(Math.pow(drag, tpf * 60));
-
-            if (velocity.magnitude() > maxSpeed) {
-                velocity = velocity.normalize().multiply(maxSpeed);
-            }
-
-            entity.translate(velocity.multiply(tpf));
-
-            // WICHTIG: Beim Drift-Score auch den Multiplikator nutzen,
-            // damit die Punktevergabe zum visuellen Speed passt.
-            calculateDriftScore(tpf, currentSpeed * displayMultiplier, newForward);
-        }
-
-        private void calculateDriftScore(double tpf, double visualSpeed, Point2D forwardDir) {
-            if (visualSpeed > 200) {
-                Point2D moveDir = velocity.normalize();
-                double angleDiff = Math.abs(moveDir.angle(forwardDir));
-
-                if (angleDiff > 15 && angleDiff < 160) {
-                    // Nutzt jetzt die visualSpeed für die Punkte
-                    int pointsEarned = (int) (angleDiff * (visualSpeed / 100.0) * tpf * 5);
-                    inc("driftScore", pointsEarned);
-                }
-            }
-        }
     }
 }

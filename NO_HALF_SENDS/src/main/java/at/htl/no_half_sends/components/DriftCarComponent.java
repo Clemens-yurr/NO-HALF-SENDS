@@ -7,13 +7,11 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DriftCarComponent extends Component {
 
-    // Basis-Werte (Schwer zu driften, langsam)
     private double baseAcceleration = 150;
     private double baseMaxSpeed = 800;
     private double baseTurnSpeed = 180;
-    private double baseLateralGrip = 0.95; // Sehr rutschig am Anfang
+    private double baseLateralGrip = 0.95;
 
-    // Aktuelle Werte (nach Upgrades)
     private double acceleration;
     private double maxSpeed;
     private double turnSpeed;
@@ -26,22 +24,31 @@ public class DriftCarComponent extends Component {
 
     private PlayerProfile profile;
 
+    // NEU: Zählt die Nachkommastellen für das Geld mit, damit nichts verloren geht!
+    private double internalCashCounter = 0;
+
     public DriftCarComponent(PlayerProfile profile) {
         this.profile = profile;
         applyUpgrades();
     }
 
     private void applyUpgrades() {
-        // Turbo macht das Auto schneller
-        acceleration = baseAcceleration + (profile.turboLevel * 50) + (profile.intakeLevel * 10);
-        maxSpeed = baseMaxSpeed + (profile.turboLevel * 250);
+        if (profile.currentCar.contains("Nissan")) {
+            baseAcceleration = 150; baseMaxSpeed = 800; baseTurnSpeed = 180;
+        } else if (profile.currentCar.contains("Subaru")) {
+            baseAcceleration = 180; baseMaxSpeed = 950; baseTurnSpeed = 190;
+        } else if (profile.currentCar.contains("Toyota")) {
+            baseAcceleration = 220; baseMaxSpeed = 1100; baseTurnSpeed = 200;
+        } else if (profile.currentCar.contains("Ferrari")) {
+            baseAcceleration = 280; baseMaxSpeed = 1300; baseTurnSpeed = 220;
+        } else {
+            baseAcceleration = 150; baseMaxSpeed = 800; baseTurnSpeed = 180;
+        }
 
-        // Differential macht das Lenken und Driften aggressiver
-        turnSpeed = baseTurnSpeed + (profile.differentialLevel * 30);
-
-        // Reifen verbessern den Grip (weniger Rutschen = kontrollierbarerer Drift)
-        // Je kleiner der LateralGrip Wert (z.B. 0.90 statt 0.95), desto MEHR Grip hat das Auto quer!
-        lateralGrip = baseLateralGrip - (profile.tiresLevel * 0.02);
+        acceleration = baseAcceleration + (profile.turboLevel * 30) + (profile.intakeLevel * 10) + (profile.transmissionLevel * 20);
+        maxSpeed = baseMaxSpeed + (profile.turboLevel * 150) + (profile.chassisLevel * 50);
+        turnSpeed = baseTurnSpeed + (profile.differentialLevel * 20) + (profile.chassisLevel * 5);
+        lateralGrip = baseLateralGrip - (profile.tiresLevel * 0.015);
     }
 
     @Override
@@ -49,32 +56,25 @@ public class DriftCarComponent extends Component {
         double rotation = entity.getRotation();
         Point2D forwardDir = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
 
-        // Beschleunigung
         if (up) velocity = velocity.add(forwardDir.multiply(acceleration * tpf));
         if (down) velocity = velocity.subtract(forwardDir.multiply(acceleration * 4.0 * tpf));
 
         double currentSpeed = velocity.magnitude();
         set("speed", (int)((currentSpeed * displayMultiplier) / 10));
 
-        // Lenken (nur wenn das Auto rollt)
         if (currentSpeed > 10) {
             double turning = turnSpeed * tpf;
-            // Wenn man rückwärts fährt, Lenkung invertieren
             if (velocity.normalize().dotProduct(forwardDir) < 0) turning = -turning;
-
             if (left) entity.rotateBy(-turning);
             if (right) entity.rotateBy(turning);
         }
 
-        // Drift-Physik anwenden
         rotation = entity.getRotation();
         Point2D newForward = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
         Point2D rightDir = new Point2D(-newForward.getY(), newForward.getX());
 
         double forwardVelocity = velocity.dotProduct(newForward);
         double lateralVelocity = velocity.dotProduct(rightDir);
-
-        // Lateraler Grip wendet an, wie stark das Auto zur Seite rutscht
         lateralVelocity *= Math.pow(lateralGrip, tpf * 60);
 
         velocity = newForward.multiply(forwardVelocity).add(rightDir.multiply(lateralVelocity));
@@ -93,13 +93,20 @@ public class DriftCarComponent extends Component {
             Point2D moveDir = velocity.normalize();
             double angleDiff = Math.abs(moveDir.angle(forwardDir));
 
-            // Drift Winkel zwischen 15 und 90 Grad gibt Punkte
             if (angleDiff > 15 && angleDiff < 90) {
                 int pointsEarned = (int) (angleDiff * (visualSpeed / 100.0) * tpf * 5);
-                inc("driftScore", pointsEarned);
 
-                // Geld direkt mit dem Score verknüpfen
-                inc("cash", pointsEarned / 10);
+                if (pointsEarned > 0) {
+                    inc("driftScore", pointsEarned);
+
+                    // NEU: Kommazahlen sammeln, damit kein Geld verschwindet
+                    internalCashCounter += (pointsEarned / 10.0);
+                    if (internalCashCounter >= 1.0) {
+                        int cashToAdd = (int) internalCashCounter;
+                        inc("cash", cashToAdd);
+                        internalCashCounter -= cashToAdd; // Restbetrag behalten
+                    }
+                }
             }
         }
     }
