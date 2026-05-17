@@ -102,16 +102,24 @@ public class NoHalfSendsApp extends GameApplication {
     protected void initGame() {
         setLevelFromMap("Test_MK9.tmx");
 
-        // WICHTIG: Hier laden wir jetzt das Bild aus dem Profil und übergeben das Profil an die Physik!
+        // HIER IST DER FIX:
+        // Wir definieren die echte Größe des Autos für Bild UND Hitbox.
+        // Da dein Zoom auf 10 steht, muss das Auto nativ sehr klein sein.
+        // Passe diese Werte an (z.B. 40 und 20), bis die Größe perfekt für deine Straßen ist!
+        double carWidth = 40;
+        double carHeight = 20;
+
         player = entityBuilder()
                 .at(490, 570)
-                .viewWithBBox(currentProfile.currentCar) // <- Dynamisches Auto!
+                // Nutze texture() statt nur den String, um die Größe direkt festzulegen
+                .viewWithBBox(texture(currentProfile.currentCar, carWidth, carHeight))
                 .with(new CollidableComponent(true))
-                .with(new DriftCarComponent(currentProfile)) // <- Hier werden Upgrades geladen!
-                .scale(0.1, 0.1)
+                .with(new DriftCarComponent(currentProfile))
+                // .scale(0.1, 0.1) <-- DAS MUSS WEG!
                 .rotate(90)
                 .buildAndAttach();
 
+        // Der Rotationsursprung berechnet sich jetzt automatisch richtig aus der neuen Breite/Höhe
         player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2));
 
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);

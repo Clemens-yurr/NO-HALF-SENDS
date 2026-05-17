@@ -172,10 +172,10 @@ public class DriftMainMenu extends FXGLMenu {
         title.setFill(Color.WHITE);
 
         HBox carList = new HBox(20,
-                createCarCard("Nissan GTR", "Nissan_GTR_R35_mk2.png", 0),
-                createCarCard("Subaru WRX", "Subaru_WRX_STI.png", 20000),
-                createCarCard("Toyota Supra", "Toyota_Supra.png", 50000),
-                createCarCard("Ferrari F12", "Ferrari_F12.png", 100000)
+                createCarCard("Nissan GTR", "Nissan_GTR_R35_mk4.png", 0),
+                createCarCard("Subaru WRX", "Subaru_WRX_STI_mk2.png", 20000),
+                createCarCard("Toyota Supra", "Toyota_Supra_mk2.png", 50000),
+                createCarCard("Ferrari F12", "Ferrari_F12_mk2.png", 100000)
         );
         carList.setAlignment(Pos.CENTER);
 
