@@ -8,18 +8,18 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class DriftCarComponent extends Component {
 
     // --- NEUE, AUSGEGLICHENE PHYSIK-BASISWERTE ---
-    private double baseAcceleration = 220;
-    private double baseMaxSpeed = 900;
-    private double baseTurnSpeed = 200;
+    private double baseAcceleration = 20;
+    private double baseMaxSpeed = 200;
+    private double baseTurnSpeed = 110;
 
     // Höherer Wert (0.97) sorgt dafür, dass das Auto im Querstehen Schwung BEHÄLT
-    private double baseLateralGrip = 0.97;
+    private double baseLateralGrip = 0.94;
 
     private double acceleration;
     private double maxSpeed;
     private double turnSpeed;
     private double lateralGrip;
-    private double drag = 0.996;
+    private double drag = 0.995;
 
     // Erhöht, damit der Tacho trotz niedrigerer Engine-Werte coole Km/H anzeigt
     private double speedMultiplier = 2.2;
@@ -38,15 +38,15 @@ public class DriftCarComponent extends Component {
     private void applyUpgrades() {
         // Skalierung der Autoklassen an die neuen, spielbaren Werte angepasst
         if (profile.currentCar.contains("Nissan")) {
-            baseAcceleration = 220; baseMaxSpeed = 900; baseTurnSpeed = 200;
+            baseAcceleration = 140; baseMaxSpeed = 900; baseTurnSpeed = 170;
         } else if (profile.currentCar.contains("Subaru")) {
-            baseAcceleration = 240; baseMaxSpeed = 950; baseTurnSpeed = 210;
+            baseAcceleration = 150; baseMaxSpeed = 950; baseTurnSpeed = 180;
         } else if (profile.currentCar.contains("Toyota")) {
-            baseAcceleration = 260; baseMaxSpeed = 1000; baseTurnSpeed = 220;
+            baseAcceleration = 160; baseMaxSpeed = 1000; baseTurnSpeed = 190;
         } else if (profile.currentCar.contains("Ferrari") || profile.currentCar.contains("Ferarri")) {
-            baseAcceleration = 300; baseMaxSpeed = 1100; baseTurnSpeed = 240;
+            baseAcceleration = 180; baseMaxSpeed = 1100; baseTurnSpeed = 200;
         } else {
-            baseAcceleration = 220; baseMaxSpeed = 900; baseTurnSpeed = 200;
+            baseAcceleration = 140; baseMaxSpeed = 900; baseTurnSpeed = 200;
         }
 
         // Upgrades skalieren feinfühliger
@@ -94,7 +94,7 @@ public class DriftCarComponent extends Component {
         Point2D rightDir = new Point2D(-newForward.getY(), newForward.getX());
 
         double forwardVelocity = velocity.dotProduct(newForward);
-        double maxReverseSpeed = maxSpeed * 0.25;
+        double maxReverseSpeed = maxSpeed * 0.10;
 
         if (forwardVelocity > maxSpeed) forwardVelocity = maxSpeed;
         if (forwardVelocity < -maxReverseSpeed) forwardVelocity = -maxReverseSpeed;

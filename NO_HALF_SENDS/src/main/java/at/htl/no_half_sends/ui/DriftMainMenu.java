@@ -43,10 +43,10 @@ public class DriftMainMenu extends FXGLMenu {
         Button btnPlay = createMenuButton("START DRIFTING", () -> fireNewGame());
         Button btnUpgrades = createMenuButton("UPGRADES", () -> showMenu(upgradesBox));
         Button btnGarage = createMenuButton("CARS", () -> showMenu(garageBox));
-        Button btnSettings = createMenuButton("SETTINGS", () -> System.out.println("Settings Clicked"));
         Button btnExit = createMenuButton("EXIT", () -> getGameController().exit());
 
-        mainBox = new VBox(20, title, btnPlay, btnUpgrades, btnGarage, btnSettings, btnExit);
+        // btnSettings wurde hier aus der Liste entfernt
+        mainBox = new VBox(20, title, btnPlay, btnUpgrades, btnGarage, btnExit);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setTranslateX(getAppWidth() / 2.0 - 200);
         mainBox.setTranslateY(getAppHeight() / 2.0 - 300);
@@ -162,7 +162,6 @@ public class DriftMainMenu extends FXGLMenu {
         title.setFont(Font.font("Impact", 60));
         title.setFill(Color.WHITE);
 
-        // HIER WURDEN DIE DATEINAMEN EXAKT AN DEINE ANGEPASST!
         HBox carList = new HBox(20,
                 createCarCard("Nissan GTR", "Nissan_GTR_R35_mk4.png", 0),
                 createCarCard("Subaru WRX", "Subaru_WRX_STI_mk2.png", 20000),

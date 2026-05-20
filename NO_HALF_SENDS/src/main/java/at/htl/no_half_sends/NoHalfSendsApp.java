@@ -92,50 +92,47 @@ public class NoHalfSendsApp extends GameApplication {
     protected void initGame() {
         setLevelFromMap("FinalMap.tmx");
 
-        // Profil vor dem Rennen nochmal frisch laden (WICHTIG!)
+        // Profil frisch ladenw
         currentProfile = profileManager.loadProfile();
 
-        // --- HIER IST DIE ANPASSUNG DER GRÖSSE ---
+        // --- MAßGESCHNEIDERTE PROPORTIONEN FÜR 3/4 FAHRBAHN ---
+        double carWidth = 15;  // Kompakt genug, um perfekt in die Kurven zu passen
+        double carHeight = 7.5; // Korrektes 2:1 Seitenverhältnis
 
-        // Wir setzen die gewünschte, kleine Größe des Autos fest.
-        // Probiere Werte zwischen 25 und 40 für die Breite, bis es perfekt passt!
-        // Eine Straßenlinie ist meistens nur wenige Pixel breit.
-        double carWidth = 38; // Beispielhaft 38 Pixel breit
-        double carHeight = 19; // 50% der Breite für das richtige Verhältnis
-
-        // 1. Wir laden die scharfe Textur in voller Originalgröße (256x128)
+        // 1. Textur laden
         Texture carTexture = texture(currentProfile.currentCar);
 
-        // 2. Wir schalten die Weichzeichnung beim Zoomen aus (knackscharfe Pixel!)
+        // 2. Pixel-Art scharf halten
         ((ImageView) carTexture.getNode()).setSmooth(false);
 
-        // 3. Wir zwingen die Textur direkt in die kleine Zielgröße (38x19)
+        // 3. Auf exakte Maße skalieren
         carTexture.setFitWidth(carWidth);
         carTexture.setFitHeight(carHeight);
-        carTexture.setPreserveRatio(true); // Verhindert Verzerrungen
+        carTexture.setPreserveRatio(true);
 
-        // 4. Wir bauen das Entity mit der scharfen, kleinen Textur
+        // 4. Spieler spawnen
         player = entityBuilder()
-                .at(490, 570)
+                .at(250, 200) // Startposition leicht angepasst für die FinalMap
                 .viewWithBBox(carTexture)
                 .with(new CollidableComponent(true))
                 .with(new DriftCarComponent(currentProfile))
                 .buildAndAttach();
 
-        // 5. Rotation-Ursprung aktualisieren
+        // 5. Rotations-Mittelpunkt exakt zentrieren
         player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2));
 
-        // Auto standardmäßig um 90 Grad drehen
+        // Startrichtung ausrichten
         player.setRotation(90);
 
+        // Kamera-Setup
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
-        getGameScene().getViewport().setBounds(0, 0, 1920, 1080);
 
-        // --- KAMERA-ZOOM ANPASSEN ---
-        // Wenn das Auto viel kleiner ist (38px), müssen wir die Kamera deutlich NÄHER ranbringen!
-        // Probiere Werte zwischen 4.0 und 6.0, bis das Auto die richtige Größe auf dem Bildschirm hat.
-        // '10.0' (vom Anfang) ist vielleicht zu viel, aber '2.0' (von vorhin) ist zu wenig für ein 38px-Auto.
-        getGameScene().getViewport().setZoom(5.0);
+        // Grenzen der Kamera basierend auf deiner 20x20 Tiles Map (20 * 64 = 1280)
+        getGameScene().getViewport().setBounds(0, 0, 1280, 1280);
+
+        // --- STARKER CAMERA-ZOOM ---
+        // Holt die Map extrem nah ran, damit das kleine Auto perfekt lesbar bleibt!
+        getGameScene().getViewport().setZoom(10);
     }
 
     @Override
