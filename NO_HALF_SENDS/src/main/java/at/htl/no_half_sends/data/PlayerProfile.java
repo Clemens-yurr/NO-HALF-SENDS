@@ -5,10 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PlayerProfile {
-    public int cash = 1000000000;
+    // 1 MILLION DOLLAR ZUM TESTEN!
+    public int cash = 1000000;
     public int highestScore = 0;
 
-    // Upgrades (0 = Standard, 1 bis 5 = Upgradestufen)
+    // Alles auf 0 zurückgesetzt
     public int turboLevel = 0;
     public int differentialLevel = 0;
     public int tiresLevel = 0;
@@ -18,6 +19,5 @@ public class PlayerProfile {
 
     public String currentCar = "Nissan_GTR_R35_mk4.png";
 
-    // Liste der gekauften Autos (Der Nissan ist standardmäßig drin)
     public List<String> ownedCars = new ArrayList<>(Arrays.asList("Nissan_GTR_R35_mk4.png"));
 }

@@ -7,24 +7,27 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DriftCarComponent extends Component {
 
-    private double baseAcceleration = 150;
-    private double baseMaxSpeed = 800;
-    private double baseTurnSpeed = 180;
-    private double baseLateralGrip = 0.95;
+    // --- NEUE, AUSGEGLICHENE PHYSIK-BASISWERTE ---
+    private double baseAcceleration = 220;
+    private double baseMaxSpeed = 900;
+    private double baseTurnSpeed = 200;
+
+    // Höherer Wert (0.97) sorgt dafür, dass das Auto im Querstehen Schwung BEHÄLT
+    private double baseLateralGrip = 0.97;
 
     private double acceleration;
     private double maxSpeed;
     private double turnSpeed;
     private double lateralGrip;
-    private double drag = 0.998;
-    private double displayMultiplier = 2.2;
+    private double drag = 0.996;
+
+    // Erhöht, damit der Tacho trotz niedrigerer Engine-Werte coole Km/H anzeigt
+    private double speedMultiplier = 2.2;
 
     private Point2D velocity = Point2D.ZERO;
     public boolean up, down, left, right;
 
     private PlayerProfile profile;
-
-    // NEU: Zählt die Nachkommastellen für das Geld mit, damit nichts verloren geht!
     private double internalCashCounter = 0;
 
     public DriftCarComponent(PlayerProfile profile) {
@@ -33,22 +36,26 @@ public class DriftCarComponent extends Component {
     }
 
     private void applyUpgrades() {
+        // Skalierung der Autoklassen an die neuen, spielbaren Werte angepasst
         if (profile.currentCar.contains("Nissan")) {
-            baseAcceleration = 150; baseMaxSpeed = 800; baseTurnSpeed = 180;
+            baseAcceleration = 220; baseMaxSpeed = 900; baseTurnSpeed = 200;
         } else if (profile.currentCar.contains("Subaru")) {
-            baseAcceleration = 180; baseMaxSpeed = 950; baseTurnSpeed = 190;
+            baseAcceleration = 240; baseMaxSpeed = 950; baseTurnSpeed = 210;
         } else if (profile.currentCar.contains("Toyota")) {
-            baseAcceleration = 220; baseMaxSpeed = 1100; baseTurnSpeed = 200;
-        } else if (profile.currentCar.contains("Ferrari")) {
-            baseAcceleration = 280; baseMaxSpeed = 1300; baseTurnSpeed = 220;
+            baseAcceleration = 260; baseMaxSpeed = 1000; baseTurnSpeed = 220;
+        } else if (profile.currentCar.contains("Ferrari") || profile.currentCar.contains("Ferarri")) {
+            baseAcceleration = 300; baseMaxSpeed = 1100; baseTurnSpeed = 240;
         } else {
-            baseAcceleration = 150; baseMaxSpeed = 800; baseTurnSpeed = 180;
+            baseAcceleration = 220; baseMaxSpeed = 900; baseTurnSpeed = 200;
         }
 
+        // Upgrades skalieren feinfühliger
         acceleration = baseAcceleration + (profile.turboLevel * 30) + (profile.intakeLevel * 10) + (profile.transmissionLevel * 20);
-        maxSpeed = baseMaxSpeed + (profile.turboLevel * 150) + (profile.chassisLevel * 50);
-        turnSpeed = baseTurnSpeed + (profile.differentialLevel * 20) + (profile.chassisLevel * 5);
-        lateralGrip = baseLateralGrip - (profile.tiresLevel * 0.015);
+        maxSpeed = baseMaxSpeed + (profile.turboLevel * 80) + (profile.chassisLevel * 30);
+        turnSpeed = baseTurnSpeed + (profile.differentialLevel * 15) + (profile.chassisLevel * 5);
+
+        // Reifen verbessern die Stabilität leicht
+        lateralGrip = baseLateralGrip - (profile.tiresLevel * 0.005);
     }
 
     @Override
@@ -57,10 +64,23 @@ public class DriftCarComponent extends Component {
         Point2D forwardDir = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
 
         if (up) velocity = velocity.add(forwardDir.multiply(acceleration * tpf));
-        if (down) velocity = velocity.subtract(forwardDir.multiply(acceleration * 4.0 * tpf));
+
+        if (down) {
+            double currentForwardSpeed = velocity.dotProduct(forwardDir);
+            if (currentForwardSpeed > 20) {
+                // Starkes Bremsen vorwärts
+                velocity = velocity.subtract(forwardDir.multiply(acceleration * 3.0 * tpf));
+            } else {
+                // Sanftes Rückwärtsfahren
+                velocity = velocity.subtract(forwardDir.multiply(acceleration * 0.5 * tpf));
+            }
+        }
 
         double currentSpeed = velocity.magnitude();
-        set("speed", (int)((currentSpeed * displayMultiplier) / 10));
+
+        // Tacho berechnen
+        int visualKmH = (int)((currentSpeed * speedMultiplier) / 10);
+        set("speed", visualKmH);
 
         if (currentSpeed > 10) {
             double turning = turnSpeed * tpf;
@@ -74,37 +94,42 @@ public class DriftCarComponent extends Component {
         Point2D rightDir = new Point2D(-newForward.getY(), newForward.getX());
 
         double forwardVelocity = velocity.dotProduct(newForward);
+        double maxReverseSpeed = maxSpeed * 0.25;
+
+        if (forwardVelocity > maxSpeed) forwardVelocity = maxSpeed;
+        if (forwardVelocity < -maxReverseSpeed) forwardVelocity = -maxReverseSpeed;
+
         double lateralVelocity = velocity.dotProduct(rightDir);
         lateralVelocity *= Math.pow(lateralGrip, tpf * 60);
 
         velocity = newForward.multiply(forwardVelocity).add(rightDir.multiply(lateralVelocity));
         velocity = velocity.multiply(Math.pow(drag, tpf * 60));
 
-        if (velocity.magnitude() > maxSpeed) {
-            velocity = velocity.normalize().multiply(maxSpeed);
-        }
-
         entity.translate(velocity.multiply(tpf));
-        calculateDriftScore(tpf, currentSpeed * displayMultiplier, newForward);
+
+        // Drift-Score berechnen
+        calculateDriftScore(tpf, visualKmH, newForward);
     }
 
-    private void calculateDriftScore(double tpf, double visualSpeed, Point2D forwardDir) {
-        if (visualSpeed > 200) {
+    private void calculateDriftScore(double tpf, int visualKmH, Point2D forwardDir) {
+        // Ab 25 km/h zählt der Drift (angepasst an die neue Geschwindigkeit)
+        if (visualKmH > 25 && velocity.magnitude() > 50) {
             Point2D moveDir = velocity.normalize();
             double angleDiff = Math.abs(moveDir.angle(forwardDir));
 
-            if (angleDiff > 15 && angleDiff < 90) {
-                int pointsEarned = (int) (angleDiff * (visualSpeed / 100.0) * tpf * 5);
+            // Wenn das Auto zwischen 12 und 90 Grad quer steht, gibt es Punkte!
+            if (angleDiff > 12 && angleDiff < 90) {
+                int pointsEarned = (int) (angleDiff * (visualKmH / 12.0) * tpf * 8);
 
                 if (pointsEarned > 0) {
                     inc("driftScore", pointsEarned);
 
-                    // NEU: Kommazahlen sammeln, damit kein Geld verschwindet
-                    internalCashCounter += (pointsEarned / 10.0);
+                    // Geldberechnung ausführen
+                    internalCashCounter += (pointsEarned / 8.0);
                     if (internalCashCounter >= 1.0) {
                         int cashToAdd = (int) internalCashCounter;
                         inc("cash", cashToAdd);
-                        internalCashCounter -= cashToAdd; // Restbetrag behalten
+                        internalCashCounter -= cashToAdd;
                     }
                 }
             }

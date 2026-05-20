@@ -60,24 +60,16 @@ public class DriftMainMenu extends FXGLMenu {
         getContentRoot().getChildren().addAll(bg, mainBox, upgradesBox, garageBox);
     }
 
-    // ==========================================
-    // SYNC ZWISCHEN SPIEL UND MENÜ
-    // ==========================================
-
     private void showMenu(VBox menuToShow) {
-        // 1. Holt sich das aktuelle Profil aus der Datei
         profile = profileManager.loadProfile();
 
-        // 2. Wenn wir in einem Rennen sind (Pause-Menü), nimm das Live-Geld!
         if (getApp() != null && getWorldProperties().exists("cash")) {
             profile.cash = geti("cash");
         }
 
-        // 3. Baut die Fenster im Hintergrund neu auf, damit die neuen Zahlen da stehen
         upgradesBox.getChildren().setAll(buildUpgradesMenu().getChildren());
         garageBox.getChildren().setAll(buildGarageMenu().getChildren());
 
-        // Schaltet die Menüs um
         mainBox.setVisible(false);
         upgradesBox.setVisible(false);
         garageBox.setVisible(false);
@@ -145,7 +137,7 @@ public class DriftMainMenu extends FXGLMenu {
 
     private void handleUpgradeBuy(String type, int currentLevel, int cost) {
         if (profile.cash >= cost) {
-            profile.cash -= cost; // Geld abziehen
+            profile.cash -= cost;
             switch(type) {
                 case "turbo": profile.turboLevel++; break;
                 case "diff": profile.differentialLevel++; break;
@@ -157,7 +149,6 @@ public class DriftMainMenu extends FXGLMenu {
 
             profileManager.saveProfile(profile);
 
-            // Zieht das Geld auch sofort oben links im laufenden Spiel ab!
             if (getApp() != null && getWorldProperties().exists("cash")) {
                 set("cash", profile.cash);
             }
@@ -171,11 +162,12 @@ public class DriftMainMenu extends FXGLMenu {
         title.setFont(Font.font("Impact", 60));
         title.setFill(Color.WHITE);
 
+        // HIER WURDEN DIE DATEINAMEN EXAKT AN DEINE ANGEPASST!
         HBox carList = new HBox(20,
                 createCarCard("Nissan GTR", "Nissan_GTR_R35_mk4.png", 0),
                 createCarCard("Subaru WRX", "Subaru_WRX_STI_mk2.png", 20000),
                 createCarCard("Toyota Supra", "Toyota_Supra_mk2.png", 50000),
-                createCarCard("Ferrari F12", "Ferrari_F12_mk2.png", 100000)
+                createCarCard("Ferrari F12", "Ferarri_F12_mk2.png", 100000)
         );
         carList.setAlignment(Pos.CENTER);
 

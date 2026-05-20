@@ -12,7 +12,9 @@ import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Point2D;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -38,26 +40,16 @@ public class NoHalfSendsApp extends GameApplication {
         gameSettings.setDeveloperMenuEnabled(true);
         gameSettings.setMainMenuEnabled(true);
 
-        // Hier überschreiben wir das Hauptmenü UND das Pause-Menü!
         gameSettings.setSceneFactory(new SceneFactory() {
             @Override
-            public FXGLMenu newMainMenu() {
-                return new DriftMainMenu();
-            }
-
-            // Das überschreibt das hässliche FXGL Menü im Spiel (wenn man ESC drückt)
-            // Wir nutzen der Einfachheit halber fürs Erste einfach dein MainMenu dafür,
-            // damit das Standard-Menü komplett weg ist!
+            public FXGLMenu newMainMenu() { return new DriftMainMenu(); }
             @Override
-            public FXGLMenu newGameMenu() {
-                return new DriftMainMenu();
-            }
+            public FXGLMenu newGameMenu() { return new DriftMainMenu(); }
         });
     }
 
     @Override
     protected void onPreInit() {
-        // Lade den Speicherstand BEVOR das Spiel startet
         profileManager = new ProfileManager();
         currentProfile = profileManager.loadProfile();
     }
@@ -66,7 +58,6 @@ public class NoHalfSendsApp extends GameApplication {
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("driftScore", 0);
         vars.put("speed", 0);
-        // Wir setzen das Cash aus der JSON-Datei als Spiel-Variable
         vars.put("cash", currentProfile.cash);
     }
 
@@ -92,7 +83,6 @@ public class NoHalfSendsApp extends GameApplication {
             @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).right = false; }
         }, KeyCode.D);
 
-        // Speicher-Button (Optional, z.B. wenn man das Auto gewechselt hat)
         getInput().addAction(new UserAction("Speichern") {
             @Override protected void onActionBegin() { saveGameData(); }
         }, KeyCode.F5);
@@ -100,31 +90,52 @@ public class NoHalfSendsApp extends GameApplication {
 
     @Override
     protected void initGame() {
-        setLevelFromMap("Test_MK9.tmx");
+        setLevelFromMap("FinalMap.tmx");
 
-        // HIER IST DER FIX:
-        // Wir definieren die echte Größe des Autos für Bild UND Hitbox.
-        // Da dein Zoom auf 10 steht, muss das Auto nativ sehr klein sein.
-        // Passe diese Werte an (z.B. 40 und 20), bis die Größe perfekt für deine Straßen ist!
-        double carWidth = 40;
-        double carHeight = 20;
+        // Profil vor dem Rennen nochmal frisch laden (WICHTIG!)
+        currentProfile = profileManager.loadProfile();
 
+        // --- HIER IST DIE ANPASSUNG DER GRÖSSE ---
+
+        // Wir setzen die gewünschte, kleine Größe des Autos fest.
+        // Probiere Werte zwischen 25 und 40 für die Breite, bis es perfekt passt!
+        // Eine Straßenlinie ist meistens nur wenige Pixel breit.
+        double carWidth = 38; // Beispielhaft 38 Pixel breit
+        double carHeight = 19; // 50% der Breite für das richtige Verhältnis
+
+        // 1. Wir laden die scharfe Textur in voller Originalgröße (256x128)
+        Texture carTexture = texture(currentProfile.currentCar);
+
+        // 2. Wir schalten die Weichzeichnung beim Zoomen aus (knackscharfe Pixel!)
+        ((ImageView) carTexture.getNode()).setSmooth(false);
+
+        // 3. Wir zwingen die Textur direkt in die kleine Zielgröße (38x19)
+        carTexture.setFitWidth(carWidth);
+        carTexture.setFitHeight(carHeight);
+        carTexture.setPreserveRatio(true); // Verhindert Verzerrungen
+
+        // 4. Wir bauen das Entity mit der scharfen, kleinen Textur
         player = entityBuilder()
                 .at(490, 570)
-                // Nutze texture() statt nur den String, um die Größe direkt festzulegen
-                .viewWithBBox(texture(currentProfile.currentCar, carWidth, carHeight))
+                .viewWithBBox(carTexture)
                 .with(new CollidableComponent(true))
                 .with(new DriftCarComponent(currentProfile))
-                // .scale(0.1, 0.1) <-- DAS MUSS WEG!
-                .rotate(90)
                 .buildAndAttach();
 
-        // Der Rotationsursprung berechnet sich jetzt automatisch richtig aus der neuen Breite/Höhe
+        // 5. Rotation-Ursprung aktualisieren
         player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2));
+
+        // Auto standardmäßig um 90 Grad drehen
+        player.setRotation(90);
 
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
         getGameScene().getViewport().setBounds(0, 0, 1920, 1080);
-        getGameScene().getViewport().setZoom(10);
+
+        // --- KAMERA-ZOOM ANPASSEN ---
+        // Wenn das Auto viel kleiner ist (38px), müssen wir die Kamera deutlich NÄHER ranbringen!
+        // Probiere Werte zwischen 4.0 und 6.0, bis das Auto die richtige Größe auf dem Bildschirm hat.
+        // '10.0' (vom Anfang) ist vielleicht zu viel, aber '2.0' (von vorhin) ist zu wenig für ein 38px-Auto.
+        getGameScene().getViewport().setZoom(5.0);
     }
 
     @Override
@@ -147,7 +158,6 @@ public class NoHalfSendsApp extends GameApplication {
         speedText.setTranslateY(110);
         speedText.textProperty().bind(getip("speed").asString("KM/H: %d"));
 
-        // NEU: Cash-Anzeige im Spiel
         Text cashText = new Text();
         cashText.setFont(Font.font("Arial", 48));
         cashText.setFill(Color.LIGHTGREEN);
@@ -162,7 +172,6 @@ public class NoHalfSendsApp extends GameApplication {
         addUINode(cashText);
     }
 
-    // Hilfsmethode zum Speichern des Geldes
     public void saveGameData() {
         currentProfile.cash = geti("cash");
         profileManager.saveProfile(currentProfile);
