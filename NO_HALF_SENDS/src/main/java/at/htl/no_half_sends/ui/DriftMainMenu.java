@@ -85,14 +85,15 @@ public class DriftMainMenu extends FXGLMenu {
         cashText.setFont(Font.font("Arial", 30));
         cashText.setFill(Color.LIGHTGREEN);
 
-        HBox row1 = new HBox(20,
+        // HBox Spacing auf 30 erhöht für größere Cards
+        HBox row1 = new HBox(30,
                 createUpgradeCard("Turbo", profile.turboLevel, "turbo", "Turbo.png"),
                 createUpgradeCard("Differential", profile.differentialLevel, "diff", "Differential.png"),
                 createUpgradeCard("Tires", profile.tiresLevel, "tires", "Tires.png")
         );
         row1.setAlignment(Pos.CENTER);
 
-        HBox row2 = new HBox(20,
+        HBox row2 = new HBox(30,
                 createUpgradeCard("Intake", profile.intakeLevel, "intake", "Intake.png"),
                 createUpgradeCard("Chassis", profile.chassisLevel, "chassis", "Chassis.png"),
                 createUpgradeCard("Transmission", profile.transmissionLevel, "trans", "Transmission.png")
@@ -101,30 +102,36 @@ public class DriftMainMenu extends FXGLMenu {
 
         Button btnBack = createMenuButton("BACK", () -> showMenu(mainBox));
 
-        VBox box = new VBox(30, title, cashText, row1, row2, btnBack);
+        // VBox Spacing leicht angepasst, TranslateY verringert, damit alles Platz hat
+        VBox box = new VBox(25, title, cashText, row1, row2, btnBack);
         box.setAlignment(Pos.CENTER);
+        // TranslateX angepasst für breiteres Gesamtlayout (3*280 + 2*30 = 900)
         box.setTranslateX(getAppWidth() / 2.0 - 450);
-        box.setTranslateY(100);
+        box.setTranslateY(50); // Höher geschoben für vertikalen Platz
         return box;
     }
 
     private VBox createUpgradeCard(String name, int currentLevel, String type, String imageName) {
-        VBox card = new VBox(10);
+        // Interner vertikaler Abstand der Elemente erhöht
+        VBox card = new VBox(15);
         card.setAlignment(Pos.CENTER);
-        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 15;");
-        card.setPrefSize(250, 290); // Höhe leicht erhöht für das Bild
+        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 20;");
+        // Card-Größe massiv erhöht: Breite 280, Höhe 380
+        card.setPrefSize(280, 380);
 
         Text title = new Text(name);
         title.setFill(Color.WHITE);
-        title.setFont(Font.font("Impact", 24));
+        title.setFont(Font.font("Impact", 28)); // Titel etwas größer
 
-        // FXGL Texture-Loader lädt das Bild direkt aus assets/textures/ und skaliert es auf 70x70 Pixel
-        Texture texture = texture(imageName, 70, 70);
+        // !!! BILDER VERGRÖSSERT auf 150x150 !!!
+        Texture texture = texture(imageName, 150, 150);
 
         Text levelText = new Text("Level: " + currentLevel + " / 5");
         levelText.setFill(Color.LIGHTGRAY);
+        levelText.setFont(Font.font("Arial", 18));
 
         Button buyBtn = new Button();
+        buyBtn.setFont(Font.font("Arial", 16));
         if (currentLevel >= 5) {
             buyBtn.setText("MAXED OUT");
             buyBtn.setDisable(true);
@@ -134,7 +141,6 @@ public class DriftMainMenu extends FXGLMenu {
             buyBtn.setOnAction(e -> handleUpgradeBuy(type, currentLevel, cost));
         }
 
-        // Texture wurde hier in die addAll-Liste hinzugefügt!
         card.getChildren().addAll(title, texture, levelText, buyBtn);
         return card;
     }
@@ -187,13 +193,12 @@ public class DriftMainMenu extends FXGLMenu {
         VBox card = new VBox(15);
         card.setAlignment(Pos.CENTER);
         card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 15;");
-        card.setPrefSize(260, 340); // Größe angepasst, damit das Auto schön Platz hat
+        card.setPrefSize(260, 340);
 
         Text title = new Text(name);
         title.setFill(Color.WHITE);
         title.setFont(Font.font("Impact", 20));
 
-        // Lädt die Auto-Textur und passt sie für die UI-Card an (z.B. Breite 140, Höhe behalten via Seitenverhältnis)
         Texture texture = texture(imageName);
         texture.setFitWidth(140);
         texture.setPreserveRatio(true);
@@ -230,7 +235,6 @@ public class DriftMainMenu extends FXGLMenu {
             });
         }
 
-        // Texture wurde hier in die addAll-Liste hinzugefügt!
         card.getChildren().addAll(title, texture, actionBtn);
         return card;
     }
