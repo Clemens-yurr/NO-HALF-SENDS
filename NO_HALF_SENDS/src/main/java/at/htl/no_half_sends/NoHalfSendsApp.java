@@ -4,6 +4,8 @@ import at.htl.no_half_sends.components.DriftCarComponent;
 import at.htl.no_half_sends.data.PlayerProfile;
 import at.htl.no_half_sends.data.ProfileManager;
 import at.htl.no_half_sends.ui.DriftMainMenu;
+import at.htl.no_half_sends.ui.GameEntityFactory;
+import at.htl.no_half_sends.ui.GameType;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
@@ -12,6 +14,7 @@ import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
@@ -90,49 +93,52 @@ public class NoHalfSendsApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        // WICHTIG: Factory hinzufügen BEVOR die Map geladen wird!
+        getGameWorld().addEntityFactory(new GameEntityFactory());
         setLevelFromMap("FinalMap.tmx");
 
-        // Profil frisch ladenw
+        // Profil frisch laden
         currentProfile = profileManager.loadProfile();
 
         // --- MAßGESCHNEIDERTE PROPORTIONEN FÜR 3/4 FAHRBAHN ---
-        double carWidth = 15;  // Kompakt genug, um perfekt in die Kurven zu passen
-        double carHeight = 7.5; // Korrektes 2:1 Seitenverhältnis
+        double carWidth = 15;
+        double carHeight = 7.5;
 
-        // 1. Textur laden
         Texture carTexture = texture(currentProfile.currentCar);
-
-        // 2. Pixel-Art scharf halten
         ((ImageView) carTexture.getNode()).setSmooth(false);
 
-        // 3. Auf exakte Maße skalieren
         carTexture.setFitWidth(carWidth);
         carTexture.setFitHeight(carHeight);
         carTexture.setPreserveRatio(true);
 
-        // 4. Spieler spawnen
+        // Spieler spawnen mit Typen-Zuweisung
         player = entityBuilder()
-                .at(250, 200) // Startposition leicht angepasst für die FinalMap
+                .type(GameType.PLAYER) // Wichtig für die Kollision!
+                .at(925, 661)
                 .viewWithBBox(carTexture)
-                .with(new CollidableComponent(true))
+                .with(new CollidableComponent(true)) // Aktiviert die Kollision für das Auto
                 .with(new DriftCarComponent(currentProfile))
                 .buildAndAttach();
 
-        // 5. Rotations-Mittelpunkt exakt zentrieren
         player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2));
-
-        // Startrichtung ausrichten
         player.setRotation(90);
 
-        // Kamera-Setup
         getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
-
-        // Grenzen der Kamera basierend auf deiner 20x20 Tiles Map (20 * 64 = 1280)
         getGameScene().getViewport().setBounds(0, 0, 1280, 1280);
-
-        // --- STARKER CAMERA-ZOOM ---
-        // Holt die Map extrem nah ran, damit das kleine Auto perfekt lesbar bleibt!
         getGameScene().getViewport().setZoom(10);
+    }
+
+    @Override
+    protected void initPhysics() {
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(GameType.PLAYER, GameType.BORDER) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity border) {
+                saveGameData();
+
+                // Ruft deine neue, ausgelagerte Klasse auf
+                getSceneService().pushSubScene(new at.htl.no_half_sends.ui.ResetSubScene());
+            }
+        });
     }
 
     @Override

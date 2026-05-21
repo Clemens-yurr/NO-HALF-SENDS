@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Test_MK9.tmx",
+    "activeFile": "FinalMap.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -15,6 +15,24 @@
         "#Mapymap": {
             "scaleInDock": 1
         },
+        "FinalMap.tmx": {
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 783.25,
+                "y": 536.5
+            }
+        },
+        "FinalMap.tmx#Grasbert": {
+            "scaleInDock": 1
+        },
+        "FinalMap.tmx#Mymap": {
+            "scaleInDock": 1
+        },
+        "Grasbert.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Grass_Tile.tsx": {
             "scaleInDock": 0.5,
             "scaleInEditor": 1
@@ -24,8 +42,16 @@
             "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
+        "Grassy2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Mapymap.tsx": {
             "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Mymap.tsx": {
+            "scaleInDock": 3,
             "scaleInEditor": 1
         },
         "Road_Main_Straight.tsx": {
@@ -144,11 +170,17 @@
     "map.tileWidth": 64,
     "map.width": 20,
     "openFiles": [
-        "roads4W.tsx",
-        "Test_MK9.tmx"
+        "FinalMap.tmx",
+        "Mymap.tsx",
+        "Grassy2.tsx",
+        "Grasbert.tsx"
     ],
     "project": "nohalfsends.tiled-project",
     "recentFiles": [
+        "Grasbert.tsx",
+        "Grassy2.tsx",
+        "Mymap.tsx",
+        "FinalMap.tmx",
         "Mapymap.tsx",
         "Test_MK9.tmx",
         "roads4W.tsx",
@@ -156,11 +188,7 @@
         "roads2W.tsx",
         "Test_MK7.tmx",
         "Test_MK8.tmx",
-        "Test_MK2.tmx",
-        "Road_Main_Straight.tsx",
-        "Test_MK6.tmx",
-        "Road_Main_Straight_02.tsx",
-        "Test_MK4.tmx"
+        "Test_MK2.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
