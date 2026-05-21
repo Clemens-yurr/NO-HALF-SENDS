@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PlayerProfile {
-    // 1 MILLION DOLLAR ZUM TESTEN!
+public class PlayerProfile { // alle werte die in der json stehen
     public int cash = 0;
     public int highestScore = 0;
 
-    // Alles auf 0 zurückgesetzt
     public int turboLevel = 0;
     public int differentialLevel = 0;
     public int tiresLevel = 0;

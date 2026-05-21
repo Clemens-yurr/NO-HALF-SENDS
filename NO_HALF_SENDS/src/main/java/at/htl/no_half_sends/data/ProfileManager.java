@@ -5,31 +5,29 @@ import com.google.gson.GsonBuilder;
 import java.io.*;
 
 public class ProfileManager {
-    private static final String SAVE_FILE = "no_half_sends_save.json";
-    private Gson gson;
+    private static final String SAVE_FILE = "no_half_sends_save.json"; //json datei wo alles gespeichert wird
+    private Gson gson; // google version von json deswegen gson
 
     public ProfileManager() {
-        // PrettyPrinting macht die JSON-Datei schön lesbar für uns
-        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        this.gson = new GsonBuilder().setPrettyPrinting().create(); // gson builder ist sowas wie string builder und pretty printing formatiert das
     }
 
-    public PlayerProfile loadProfile() {
-        File file = new File(SAVE_FILE);
+    public PlayerProfile loadProfile() { // profil laden
+        File file = new File(SAVE_FILE); // file als variable
         if (file.exists()) {
-            try (Reader reader = new FileReader(file)) {
-                return gson.fromJson(reader, PlayerProfile.class);
+            try (Reader reader = new FileReader(file)) { // file reader
+                return gson.fromJson(reader, PlayerProfile.class); // aus json wird gson gemacht und die daten werden aus playerprofile entnommen
             } catch (IOException e) {
-                System.out.println("Fehler beim Laden des Profils: " + e.getMessage());
+                System.out.println("Fehler beim Laden des Profils: " + e.getMessage()); // wenns nicht geht
             }
         }
-        // Wenn keine Datei existiert, erstelle ein neues, frisches Profil
         System.out.println("Kein Spielstand gefunden. Erstelle neues Profil.");
         return new PlayerProfile();
     }
 
-    public void saveProfile(PlayerProfile profile) {
-        try (Writer writer = new FileWriter(SAVE_FILE)) {
-            gson.toJson(profile, writer);
+    public void saveProfile(PlayerProfile profile) { // wird gespeichert
+        try (Writer writer = new FileWriter(SAVE_FILE)) { // in file schreiben
+            gson.toJson(profile, writer); // das profile wird mit dem writer in die json gespeichert
             System.out.println("Spielstand erfolgreich gespeichert!");
         } catch (IOException e) {
             System.out.println("Fehler beim Speichern: " + e.getMessage());

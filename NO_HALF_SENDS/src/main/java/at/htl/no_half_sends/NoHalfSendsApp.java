@@ -45,20 +45,20 @@ public class NoHalfSendsApp extends GameApplication {
 
         gameSettings.setSceneFactory(new SceneFactory() {
             @Override
-            public FXGLMenu newMainMenu() { return new DriftMainMenu(); }
+            public FXGLMenu newMainMenu() { return new DriftMainMenu(); }   // tauscht standard menü durch driftmainmenu aus
             @Override
-            public FXGLMenu newGameMenu() { return new DriftMainMenu(); }
+            public FXGLMenu newGameMenu() { return new DriftMainMenu(); } // tauscht pause menu aus
         });
     }
 
     @Override
-    protected void onPreInit() {
+    protected void onPreInit() { //json wird ausglesen
         profileManager = new ProfileManager();
         currentProfile = profileManager.loadProfile();
     }
 
     @Override
-    protected void initGameVars(Map<String, Object> vars) {
+    protected void initGameVars(Map<String, Object> vars) {  //spiel variablen in map
         vars.put("driftScore", 0);
         vars.put("speed", 0);
         vars.put("cash", currentProfile.cash);
@@ -67,76 +67,87 @@ public class NoHalfSendsApp extends GameApplication {
     @Override
     protected void initInput() {
         getInput().addAction(new UserAction("Gas geben") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).up = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).up = false; }
-        }, KeyCode.W);
+            @Override protected void onAction() {
+                player.getComponent(DriftCarComponent.class).up = true; // wenn man die taste hält und wieder loslässt
+            }
+            @Override protected void onActionEnd() {
+                player.getComponent(DriftCarComponent.class).up = false;
+            }
+        }, KeyCode.W); //mit w gas geben
 
         getInput().addAction(new UserAction("Bremsen / Rückwärts") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).down = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).down = false; }
+            @Override protected void onAction() {
+                player.getComponent(DriftCarComponent.class).down = true;
+            }
+            @Override protected void onActionEnd() {
+                player.getComponent(DriftCarComponent.class).down = false;
+            }
         }, KeyCode.S);
 
         getInput().addAction(new UserAction("Links lenken") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).left = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).left = false; }
+            @Override protected void onAction() {
+                player.getComponent(DriftCarComponent.class).left = true;
+            }
+            @Override protected void onActionEnd() {
+                player.getComponent(DriftCarComponent.class).left = false;
+            }
         }, KeyCode.A);
 
         getInput().addAction(new UserAction("Rechts lenken") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).right = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).right = false; }
+            @Override protected void onAction() {
+                player.getComponent(DriftCarComponent.class).right = true;
+            }
+            @Override protected void onActionEnd() {
+                player.getComponent(DriftCarComponent.class).right = false;
+            }
         }, KeyCode.D);
 
-        getInput().addAction(new UserAction("Speichern") {
+        getInput().addAction(new UserAction("Speichern") { // speichern
             @Override protected void onActionBegin() { saveGameData(); }
         }, KeyCode.F5);
     }
 
     @Override
     protected void initGame() {
-        // WICHTIG: Factory hinzufügen BEVOR die Map geladen wird!
-        getGameWorld().addEntityFactory(new GameEntityFactory());
+        getGameWorld().addEntityFactory(new GameEntityFactory()); // Entity factory
         setLevelFromMap("FinalMap.tmx");
 
-        // Profil frisch laden
-        currentProfile = profileManager.loadProfile();
+        currentProfile = profileManager.loadProfile(); // profil laden
 
-        // --- MAßGESCHNEIDERTE PROPORTIONEN FÜR 3/4 FAHRBAHN ---
-        double carWidth = 15;
+        double carWidth = 15; // auto größe
         double carHeight = 7.5;
 
-        Texture carTexture = texture(currentProfile.currentCar);
-        ((ImageView) carTexture.getNode()).setSmooth(false);
+        Texture carTexture = texture(currentProfile.currentCar); // auto laden
+        ((ImageView) carTexture.getNode()).setSmooth(false); // damit es pixelig ist aber nicht verschwommen
 
         carTexture.setFitWidth(carWidth);
         carTexture.setFitHeight(carHeight);
         carTexture.setPreserveRatio(true);
 
-        // Spieler spawnen mit Typen-Zuweisung
-        player = entityBuilder()
-                .type(GameType.PLAYER) // Wichtig für die Kollision!
-                .at(925, 661)
+        player = entityBuilder() // player wird geladen
+                .type(GameType.PLAYER)
+                .at(925, 661) //spawnpunkt
                 .viewWithBBox(carTexture)
-                .with(new CollidableComponent(true)) // Aktiviert die Kollision für das Auto
+                .with(new CollidableComponent(true))
                 .with(new DriftCarComponent(currentProfile))
                 .buildAndAttach();
 
-        player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2));
-        player.setRotation(90);
+        player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2)); // sorgt dafür das sih das auto um die eigene mitte dreht
+        player.setRotation(90); // damit das auto nach oben schaut
 
-        getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
-        getGameScene().getViewport().setBounds(0, 0, 1280, 1280);
-        getGameScene().getViewport().setZoom(10);
+        getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0); // sorgt dafür das die kamera dem auto folgt aber nicht über die map hinaus schaut
+        getGameScene().getViewport().setBounds(0, 0, 1280, 1280); // grenzen für kamera bewegung
+        getGameScene().getViewport().setZoom(10); // in die map zoomen
     }
 
     @Override
     protected void initPhysics() {
-        getPhysicsWorld().addCollisionHandler(new CollisionHandler(GameType.PLAYER, GameType.BORDER) {
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(GameType.PLAYER, GameType.BORDER) { // macht kollision zwischen border und player
             @Override
             protected void onCollisionBegin(Entity player, Entity border) {
-                saveGameData();
+                saveGameData(); // damit keine data verloren geht
 
-                // Ruft deine neue, ausgelagerte Klasse auf
-                getSceneService().pushSubScene(new at.htl.no_half_sends.ui.ResetSubScene());
+                getSceneService().pushSubScene(new at.htl.no_half_sends.ui.ResetSubScene()); // ruft das fenster auf wenn man hinaus fährt
             }
         });
     }
@@ -150,7 +161,7 @@ public class NoHalfSendsApp extends GameApplication {
         scoreText.setStrokeWidth(2);
         scoreText.setTranslateX(20);
         scoreText.setTranslateY(50);
-        scoreText.textProperty().bind(getip("driftScore").asString("DRIFT SCORE: %d"));
+        scoreText.textProperty().bind(getip("driftScore").asString("DRIFT SCORE: %d")); // für den drift score text
 
         Text speedText = new Text();
         speedText.setFont(Font.font("Arial", 48));
@@ -159,7 +170,7 @@ public class NoHalfSendsApp extends GameApplication {
         speedText.setStrokeWidth(2);
         speedText.setTranslateX(20);
         speedText.setTranslateY(110);
-        speedText.textProperty().bind(getip("speed").asString("KM/H: %d"));
+        speedText.textProperty().bind(getip("speed").asString("KM/H: %d")); // für die kmh
 
         Text cashText = new Text();
         cashText.setFont(Font.font("Arial", 48));
@@ -168,14 +179,14 @@ public class NoHalfSendsApp extends GameApplication {
         cashText.setStrokeWidth(2);
         cashText.setTranslateX(20);
         cashText.setTranslateY(170);
-        cashText.textProperty().bind(getip("cash").asString("CASH: $%d"));
+        cashText.textProperty().bind(getip("cash").asString("CASH: $%d")); // geld
 
-        addUINode(scoreText);
+        addUINode(scoreText); // projeziert auf die UI
         addUINode(speedText);
         addUINode(cashText);
     }
 
-    public void saveGameData() {
+    public void saveGameData() { // damit die werte gespeichert werden
         currentProfile.cash = geti("cash");
         profileManager.saveProfile(currentProfile);
     }

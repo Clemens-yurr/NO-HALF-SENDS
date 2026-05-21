@@ -16,11 +16,11 @@
             "scaleInDock": 1
         },
         "FinalMap.tmx": {
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 783.25,
-                "y": 536.5
+                "x": 787.5,
+                "y": 563
             }
         },
         "FinalMap.tmx#Grasbert": {

@@ -9,18 +9,17 @@ import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 
-public class GameEntityFactory implements EntityFactory {
+public class GameEntityFactory implements EntityFactory { // klasse die collisions macht
 
     @Spawns("BORDER")
-    public Entity newBorder(SpawnData data) {
-        // Sicherer Cast über Number löst das ClassCastException-Problem vollständig!
-        double width = ((Number) data.get("width")).doubleValue();
+    public Entity newBorder(SpawnData data) { // border
+        double width = ((Number) data.get("width")).doubleValue(); // größe und breiter der borders wird sich aus der tsx geholt
         double height = ((Number) data.get("height")).doubleValue();
 
         return FXGL.entityBuilder(data)
                 .type(GameType.BORDER)
-                .bbox(new HitBox(BoundingShape.box(width, height)))
-                .with(new CollidableComponent(true))
+                .bbox(new HitBox(BoundingShape.box(width, height))) // hitbox mit der größe erstellen
+                .with(new CollidableComponent(true)) // damit man colliden kann
                 .build();
     }
 }

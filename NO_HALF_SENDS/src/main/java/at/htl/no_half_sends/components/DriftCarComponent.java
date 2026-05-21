@@ -7,13 +7,12 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class DriftCarComponent extends Component {
 
-    // --- NEUE, AUSGEGLICHENE PHYSIK-BASISWERTE ---
     private double baseAcceleration = 20;
     private double baseMaxSpeed = 200;
     private double baseTurnSpeed = 110;
 
-    // Höherer Wert (0.97) sorgt dafür, dass das Auto im Querstehen Schwung BEHÄLT
-    private double baseLateralGrip = 0.94;
+
+    private double baseLateralGrip = 0.94; // sorgt dafür das das auto quer speed behält
 
     private double acceleration;
     private double maxSpeed;
@@ -21,8 +20,7 @@ public class DriftCarComponent extends Component {
     private double lateralGrip;
     private double drag = 0.995;
 
-    // Erhöht, damit der Tacho trotz niedrigerer Engine-Werte coole Km/H anzeigt
-    private double speedMultiplier = 4.4;
+    private double speedMultiplier = 4.4; //erhöht den tacho damit es realistisch wirkt
 
     private Point2D velocity = Point2D.ZERO;
     public boolean up, down, left, right;
@@ -35,97 +33,88 @@ public class DriftCarComponent extends Component {
         applyUpgrades();
     }
 
-    private void applyUpgrades() {
-        // Skalierung der Autoklassen an die neuen, spielbaren Werte angepasst
+    private void applyUpgrades() { //werte für die verschiedenen autos festlegen
         if (profile.currentCar.contains("Nissan")) {
             baseAcceleration = 140; baseMaxSpeed = 900; baseTurnSpeed = 170;
         } else if (profile.currentCar.contains("Subaru")) {
             baseAcceleration = 150; baseMaxSpeed = 950; baseTurnSpeed = 180;
         } else if (profile.currentCar.contains("Toyota")) {
             baseAcceleration = 160; baseMaxSpeed = 1000; baseTurnSpeed = 190;
-        } else if (profile.currentCar.contains("Ferrari") || profile.currentCar.contains("Ferarri")) {
+        } else if (profile.currentCar.contains("Ferrari") || profile.currentCar.contains("Ferarri")) { // weil ichs paar mal falsch geschrieben hab
             baseAcceleration = 180; baseMaxSpeed = 1100; baseTurnSpeed = 200;
         } else {
             baseAcceleration = 140; baseMaxSpeed = 900; baseTurnSpeed = 200;
         }
 
-        // Upgrades skalieren feinfühliger
-        acceleration = baseAcceleration + (profile.turboLevel * 30) + (profile.intakeLevel * 10) + (profile.transmissionLevel * 20);
+        acceleration = baseAcceleration + (profile.turboLevel * 30) + (profile.intakeLevel * 10) + (profile.transmissionLevel * 20); // für die upgrades
         maxSpeed = baseMaxSpeed + (profile.turboLevel * 80) + (profile.chassisLevel * 30);
         turnSpeed = baseTurnSpeed + (profile.differentialLevel * 15) + (profile.chassisLevel * 5);
 
-        // Reifen verbessern die Stabilität leicht
-        lateralGrip = baseLateralGrip - (profile.tiresLevel * 0.005);
+        lateralGrip = baseLateralGrip - (profile.tiresLevel * 0.005); // reifen
     }
 
     @Override
-    public void onUpdate(double tpf) {
+    public void onUpdate(double tpf) { // ist für die physik zuständig
         double rotation = entity.getRotation();
-        Point2D forwardDir = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
+        Point2D forwardDir = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));   // drift feeling
 
-        if (up) velocity = velocity.add(forwardDir.multiply(acceleration * tpf));
+        if (up) velocity = velocity.add(forwardDir.multiply(acceleration * tpf)); // gas geben wenn up true ist
 
-        if (down) {
+        if (down) { // bremsen
             double currentForwardSpeed = velocity.dotProduct(forwardDir);
             if (currentForwardSpeed > 20) {
-                // Starkes Bremsen vorwärts
-                velocity = velocity.subtract(forwardDir.multiply(acceleration * 3.0 * tpf));
+                velocity = velocity.subtract(forwardDir.multiply(acceleration * 1.5 * tpf));// mal 1.5 damit es gscheit bremst
             } else {
-                // Sanftes Rückwärtsfahren
-                velocity = velocity.subtract(forwardDir.multiply(acceleration * 0.5 * tpf));
+                velocity = velocity.subtract(forwardDir.multiply(acceleration * 0.5 * tpf));// wenn man unter 20 fährt bremst er nicht so schnell
             }
         }
 
-        double currentSpeed = velocity.magnitude();
+        double currentSpeed = velocity.magnitude(); // .magnitude wandelt zweidimensionalen vektor in eine ganz normale zahl um
 
-        // Tacho berechnen
-        int visualKmH = (int)((currentSpeed * speedMultiplier) / 10);
+        int visualKmH = (int)((currentSpeed * speedMultiplier) / 10); // der angezeigte speed soll realistisch sein damit ein ferarri auch 300 geht und nicht 30
         set("speed", visualKmH);
 
-        if (currentSpeed > 10) {
+        if (currentSpeed > 10) { // macht das man im stehen nicht lenken kann
             double turning = turnSpeed * tpf;
-            if (velocity.normalize().dotProduct(forwardDir) < 0) turning = -turning;
+            if (velocity.normalize().dotProduct(forwardDir) < 0) turning = -turning; // damit das lenken invertiert ist
             if (left) entity.rotateBy(-turning);
             if (right) entity.rotateBy(turning);
         }
 
         rotation = entity.getRotation();
-        Point2D newForward = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation)));
+        //rechnet winkel um in werte; - ist dafür da das es auch wirklich die optische spiel richtung ist
+        Point2D newForward = new Point2D(-Math.cos(Math.toRadians(rotation)), -Math.sin(Math.toRadians(rotation))); // damit das spiel weiß wo vorne und rechts ist
         Point2D rightDir = new Point2D(-newForward.getY(), newForward.getX());
 
-        double forwardVelocity = velocity.dotProduct(newForward);
-        double maxReverseSpeed = maxSpeed * 0.10;
+        double forwardVelocity = velocity.dotProduct(newForward);// rechnet durch skalarprodukt wie schnell das auto nach vorn fährt
+        double maxReverseSpeed = maxSpeed * 0.10; // damit man rückwärts nicht so schnell ist
 
-        if (forwardVelocity > maxSpeed) forwardVelocity = maxSpeed;
-        if (forwardVelocity < -maxReverseSpeed) forwardVelocity = -maxReverseSpeed;
+        if (forwardVelocity > maxSpeed) forwardVelocity = maxSpeed; // topspeed begrenzen damit man nicht 500 fährt
+        if (forwardVelocity < -maxReverseSpeed) forwardVelocity = -maxReverseSpeed; // rückwärtsspeed begrenzen
 
-        double lateralVelocity = velocity.dotProduct(rightDir);
+        double lateralVelocity = velocity.dotProduct(rightDir); // qher geschwindigkeit fürs drift feeling
         lateralVelocity *= Math.pow(lateralGrip, tpf * 60);
 
-        velocity = newForward.multiply(forwardVelocity).add(rightDir.multiply(lateralVelocity));
-        velocity = velocity.multiply(Math.pow(drag, tpf * 60));
+        velocity = newForward.multiply(forwardVelocity).add(rightDir.multiply(lateralVelocity)); // finale geschwindigkeit berechnen
+        velocity = velocity.multiply(Math.pow(drag, tpf * 60)); // damit man rutscht
 
-        entity.translate(velocity.multiply(tpf));
+        entity.translate(velocity.multiply(tpf)); // bewegt auto auf dem bildschrim
 
-        // Drift-Score berechnen
-        calculateDriftScore(tpf, visualKmH, newForward);
+        calculateDriftScore(tpf, visualKmH, newForward); // driftscore ausrechnen
     }
 
-    private void calculateDriftScore(double tpf, int visualKmH, Point2D forwardDir) {
-        // Ab 25 km/h zählt der Drift (angepasst an die neue Geschwindigkeit)
-        if (visualKmH > 25 && velocity.magnitude() > 50) {
-            Point2D moveDir = velocity.normalize();
-            double angleDiff = Math.abs(moveDir.angle(forwardDir));
+    private void calculateDriftScore(double tpf, int visualKmH, Point2D forwardDir) { // parameter für den driftscore mitgeben
+        if (visualKmH > 25 && velocity.magnitude() > 50) { // wenn man schneller wie 25 kmh fährt kann man drift punkte bekommen
+            Point2D moveDir = velocity.normalize(); // berechnet aus geschwindigkeits vektor einheitsvektor
+            double angleDiff = Math.abs(moveDir.angle(forwardDir)); // rechnet den drift aus
 
-            // Wenn das Auto zwischen 12 und 90 Grad quer steht, gibt es Punkte!
-            if (angleDiff > 12 && angleDiff < 90) {
-                int pointsEarned = (int) (angleDiff * (visualKmH / 12.0) * tpf * 8);
+            if (angleDiff > 12 && angleDiff < 90) { // wenn man über 12 grad drift winkel hat
+                int pointsEarned = (int) (angleDiff * (visualKmH / 12.0) * tpf * 8); // punkte ausrechnen aus anglediff und kmh
 
-                if (pointsEarned > 0) {
+                if (pointsEarned > 0) {// geld ausrechnen
                     inc("driftScore", pointsEarned);
 
-                    // Geldberechnung ausführen
-                    internalCashCounter += (pointsEarned / 8.0);
+                    internalCashCounter += (pointsEarned / 8.0); // durch 8 damit aus score geld wird
                     if (internalCashCounter >= 1.0) {
                         int cashToAdd = (int) internalCashCounter;
                         inc("cash", cashToAdd);
