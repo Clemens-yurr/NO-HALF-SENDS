@@ -1,186 +1,251 @@
-package at.htl.no_half_sends;
+package at.htl.no_half_sends.ui;
 
-import at.htl.no_half_sends.components.DriftCarComponent;
 import at.htl.no_half_sends.data.PlayerProfile;
 import at.htl.no_half_sends.data.ProfileManager;
-import at.htl.no_half_sends.ui.DriftMainMenu;
-import at.htl.no_half_sends.ui.GameEntityFactory;
-import at.htl.no_half_sends.ui.GameType;
-
-import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
-import com.almasb.fxgl.app.scene.SceneFactory;
-import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.components.CollidableComponent;
-import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.texture.Texture;
-import javafx.geometry.Point2D;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-import java.util.Map;
-
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-public class NoHalfSendsApp extends GameApplication {
+public class DriftMainMenu extends FXGLMenu {
 
-    private Entity player;
     private ProfileManager profileManager;
-    private PlayerProfile currentProfile;
+    private PlayerProfile profile;
 
-    @Override
-    protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setTitle("NO HALF SENDS");
-        gameSettings.setWidth(1920);
-        gameSettings.setHeight(1080);
-        gameSettings.setFullScreenAllowed(true);
-        gameSettings.setFullScreenFromStart(true);
-        gameSettings.setDeveloperMenuEnabled(true);
-        gameSettings.setMainMenuEnabled(true);
+    private VBox mainBox;
+    private VBox upgradesBox;
+    private VBox garageBox;
 
-        gameSettings.setSceneFactory(new SceneFactory() {
-            @Override
-            public FXGLMenu newMainMenu() { return new DriftMainMenu(); }
-            @Override
-            public FXGLMenu newGameMenu() { return new DriftMainMenu(); }
-        });
-    }
+    private final int[] upgradePrices = {3000, 5000, 6000, 8000, 10000};
 
-    @Override
-    protected void onPreInit() {
+    public DriftMainMenu() {
+        super(MenuType.MAIN_MENU);
+
         profileManager = new ProfileManager();
-        currentProfile = profileManager.loadProfile();
+        profile = profileManager.loadProfile();
+
+        Rectangle bg = new Rectangle(getAppWidth(), getAppHeight(), Color.color(0.1, 0.1, 0.1, 0.9));
+
+        Text title = new Text("NO HALF SENDS");
+        title.setFont(Font.font("Impact", 80));
+        title.setFill(Color.ORANGERED);
+        title.setStroke(Color.WHITE);
+        title.setStrokeWidth(2);
+
+        Button btnPlay = createMenuButton("START DRIFTING", () -> fireNewGame());
+        Button btnUpgrades = createMenuButton("UPGRADES", () -> showMenu(upgradesBox));
+        Button btnGarage = createMenuButton("CARS", () -> showMenu(garageBox));
+        Button btnExit = createMenuButton("EXIT", () -> getGameController().exit());
+
+        mainBox = new VBox(20, title, btnPlay, btnUpgrades, btnGarage, btnExit);
+        mainBox.setAlignment(Pos.CENTER);
+        mainBox.setTranslateX(getAppWidth() / 2.0 - 200);
+        mainBox.setTranslateY(getAppHeight() / 2.0 - 300);
+
+        upgradesBox = buildUpgradesMenu();
+        upgradesBox.setVisible(false);
+
+        garageBox = buildGarageMenu();
+        garageBox.setVisible(false);
+
+        getContentRoot().getChildren().addAll(bg, mainBox, upgradesBox, garageBox);
     }
 
-    @Override
-    protected void initGameVars(Map<String, Object> vars) {
-        vars.put("driftScore", 0);
-        vars.put("speed", 0);
-        vars.put("cash", currentProfile.cash);
+    private void showMenu(VBox menuToShow) {
+        profile = profileManager.loadProfile();
+
+        if (getApp() != null && getWorldProperties().exists("cash")) {
+            profile.cash = geti("cash");
+        }
+
+        upgradesBox.getChildren().setAll(buildUpgradesMenu().getChildren());
+        garageBox.getChildren().setAll(buildGarageMenu().getChildren());
+
+        mainBox.setVisible(false);
+        upgradesBox.setVisible(false);
+        garageBox.setVisible(false);
+        menuToShow.setVisible(true);
     }
 
-    @Override
-    protected void initInput() {
-        getInput().addAction(new UserAction("Gas geben") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).up = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).up = false; }
-        }, KeyCode.W);
+    private VBox buildUpgradesMenu() {
+        Text title = new Text("UPGRADE SHOP");
+        title.setFont(Font.font("Impact", 60));
+        title.setFill(Color.WHITE);
 
-        getInput().addAction(new UserAction("Bremsen / Rückwärts") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).down = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).down = false; }
-        }, KeyCode.S);
-
-        getInput().addAction(new UserAction("Links lenken") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).left = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).left = false; }
-        }, KeyCode.A);
-
-        getInput().addAction(new UserAction("Rechts lenken") {
-            @Override protected void onAction() { player.getComponent(DriftCarComponent.class).right = true; }
-            @Override protected void onActionEnd() { player.getComponent(DriftCarComponent.class).right = false; }
-        }, KeyCode.D);
-
-        getInput().addAction(new UserAction("Speichern") {
-            @Override protected void onActionBegin() { saveGameData(); }
-        }, KeyCode.F5);
-    }
-
-    @Override
-    protected void initGame() {
-        // WICHTIG: Factory hinzufügen BEVOR die Map geladen wird!
-        getGameWorld().addEntityFactory(new GameEntityFactory());
-        setLevelFromMap("FinalMap.tmx");
-
-        // Profil frisch laden
-        currentProfile = profileManager.loadProfile();
-
-        // --- MAßGESCHNEIDERTE PROPORTIONEN FÜR 3/4 FAHRBAHN ---
-        double carWidth = 15;
-        double carHeight = 7.5;
-
-        Texture carTexture = texture(currentProfile.currentCar);
-        ((ImageView) carTexture.getNode()).setSmooth(false);
-
-        carTexture.setFitWidth(carWidth);
-        carTexture.setFitHeight(carHeight);
-        carTexture.setPreserveRatio(true);
-
-        // Spieler spawnen mit Typen-Zuweisung
-        player = entityBuilder()
-                .type(GameType.PLAYER) // Wichtig für die Kollision!
-                .at(925, 661)
-                .viewWithBBox(carTexture)
-                .with(new CollidableComponent(true)) // Aktiviert die Kollision für das Auto
-                .with(new DriftCarComponent(currentProfile))
-                .buildAndAttach();
-
-        player.getTransformComponent().setRotationOrigin(new Point2D(player.getWidth() / 2, player.getHeight() / 2));
-        player.setRotation(90);
-
-        getGameScene().getViewport().bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
-        getGameScene().getViewport().setBounds(0, 0, 1280, 1280);
-        getGameScene().getViewport().setZoom(10);
-    }
-
-    @Override
-    protected void initPhysics() {
-        getPhysicsWorld().addCollisionHandler(new CollisionHandler(GameType.PLAYER, GameType.BORDER) {
-            @Override
-            protected void onCollisionBegin(Entity player, Entity border) {
-                saveGameData();
-
-                // Ruft deine neue, ausgelagerte Klasse auf
-                getSceneService().pushSubScene(new at.htl.no_half_sends.ui.ResetSubScene());
-            }
-        });
-    }
-
-    @Override
-    protected void initUI() {
-        Text scoreText = new Text();
-        scoreText.setFont(Font.font("Arial", 48));
-        scoreText.setFill(Color.WHITE);
-        scoreText.setStroke(Color.BLACK);
-        scoreText.setStrokeWidth(2);
-        scoreText.setTranslateX(20);
-        scoreText.setTranslateY(50);
-        scoreText.textProperty().bind(getip("driftScore").asString("DRIFT SCORE: %d"));
-
-        Text speedText = new Text();
-        speedText.setFont(Font.font("Arial", 48));
-        speedText.setFill(Color.WHITE);
-        speedText.setStroke(Color.BLACK);
-        speedText.setStrokeWidth(2);
-        speedText.setTranslateX(20);
-        speedText.setTranslateY(110);
-        speedText.textProperty().bind(getip("speed").asString("KM/H: %d"));
-
-        Text cashText = new Text();
-        cashText.setFont(Font.font("Arial", 48));
+        Text cashText = new Text("CASH: $" + profile.cash);
+        cashText.setFont(Font.font("Arial", 30));
         cashText.setFill(Color.LIGHTGREEN);
-        cashText.setStroke(Color.BLACK);
-        cashText.setStrokeWidth(2);
-        cashText.setTranslateX(20);
-        cashText.setTranslateY(170);
-        cashText.textProperty().bind(getip("cash").asString("CASH: $%d"));
 
-        addUINode(scoreText);
-        addUINode(speedText);
-        addUINode(cashText);
+        // HBox Spacing auf 30 erhöht für größere Cards
+        HBox row1 = new HBox(30,
+                createUpgradeCard("Turbo", profile.turboLevel, "turbo", "Turbo.png"),
+                createUpgradeCard("Differential", profile.differentialLevel, "diff", "Differential.png"),
+                createUpgradeCard("Tires", profile.tiresLevel, "tires", "Tires.png")
+        );
+        row1.setAlignment(Pos.CENTER);
+
+        HBox row2 = new HBox(30,
+                createUpgradeCard("Intake", profile.intakeLevel, "intake", "Intake.png"),
+                createUpgradeCard("Chassis", profile.chassisLevel, "chassis", "Chassis.png"),
+                createUpgradeCard("Transmission", profile.transmissionLevel, "trans", "Transmission.png")
+        );
+        row2.setAlignment(Pos.CENTER);
+
+        Button btnBack = createMenuButton("BACK", () -> showMenu(mainBox));
+
+        // VBox Spacing leicht angepasst, TranslateY verringert, damit alles Platz hat
+        VBox box = new VBox(25, title, cashText, row1, row2, btnBack);
+        box.setAlignment(Pos.CENTER);
+        // TranslateX angepasst für breiteres Gesamtlayout (3*280 + 2*30 = 900)
+        box.setTranslateX(getAppWidth() / 2.0 - 450);
+        box.setTranslateY(50); // Höher geschoben für vertikalen Platz
+        return box;
     }
 
-    public void saveGameData() {
-        currentProfile.cash = geti("cash");
-        profileManager.saveProfile(currentProfile);
+    private VBox createUpgradeCard(String name, int currentLevel, String type, String imageName) {
+        // Interner vertikaler Abstand der Elemente erhöht
+        VBox card = new VBox(15);
+        card.setAlignment(Pos.CENTER);
+        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 20;");
+        // Card-Größe massiv erhöht: Breite 280, Höhe 380
+        card.setPrefSize(280, 380);
+
+        Text title = new Text(name);
+        title.setFill(Color.WHITE);
+        title.setFont(Font.font("Impact", 28)); // Titel etwas größer
+
+        // !!! BILDER VERGRÖSSERT auf 150x150 !!!
+        Texture texture = texture(imageName, 150, 150);
+
+        Text levelText = new Text("Level: " + currentLevel + " / 5");
+        levelText.setFill(Color.LIGHTGRAY);
+        levelText.setFont(Font.font("Arial", 18));
+
+        Button buyBtn = new Button();
+        buyBtn.setFont(Font.font("Arial", 16));
+        if (currentLevel >= 5) {
+            buyBtn.setText("MAXED OUT");
+            buyBtn.setDisable(true);
+        } else {
+            int cost = upgradePrices[currentLevel];
+            buyBtn.setText("BUY ( " + cost + " )");
+            buyBtn.setOnAction(e -> handleUpgradeBuy(type, currentLevel, cost));
+        }
+
+        card.getChildren().addAll(title, texture, levelText, buyBtn);
+        return card;
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    private void handleUpgradeBuy(String type, int currentLevel, int cost) {
+        if (profile.cash >= cost) {
+            profile.cash -= cost;
+            switch(type) {
+                case "turbo": profile.turboLevel++; break;
+                case "diff": profile.differentialLevel++; break;
+                case "tires": profile.tiresLevel++; break;
+                case "intake": profile.intakeLevel++; break;
+                case "chassis": profile.chassisLevel++; break;
+                case "trans": profile.transmissionLevel++; break;
+            }
+
+            profileManager.saveProfile(profile);
+
+            if (getApp() != null && getWorldProperties().exists("cash")) {
+                set("cash", profile.cash);
+            }
+
+            upgradesBox.getChildren().setAll(buildUpgradesMenu().getChildren());
+        }
+    }
+
+    private VBox buildGarageMenu() {
+        Text title = new Text("GARAGE");
+        title.setFont(Font.font("Impact", 60));
+        title.setFill(Color.WHITE);
+
+        HBox carList = new HBox(20,
+                createCarCard("Nissan GTR", "Nissan_GTR_R35_mk4.png", 0, "Nissan_GTR_R35_mk4.png"),
+                createCarCard("Subaru WRX", "Subaru_WRX_STI_mk2.png", 20000, "Subaru_WRX_STI_mk2.png"),
+                createCarCard("Toyota Supra", "Toyota_Supra_mk2.png", 35000, "Toyota_Supra_mk2.png"),
+                createCarCard("Ferrari F12", "Ferarri_F12_mk2.png", 65000, "Ferarri_F12_mk2.png")
+        );
+        carList.setAlignment(Pos.CENTER);
+
+        Button btnBack = createMenuButton("BACK", () -> showMenu(mainBox));
+
+        VBox box = new VBox(40, title, carList, btnBack);
+        box.setAlignment(Pos.CENTER);
+        box.setTranslateX(getAppWidth() / 2.0 - 550);
+        box.setTranslateY(200);
+        return box;
+    }
+
+    private VBox createCarCard(String name, String imagePath, int price, String imageName) {
+        VBox card = new VBox(15);
+        card.setAlignment(Pos.CENTER);
+        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 15;");
+        card.setPrefSize(260, 340);
+
+        Text title = new Text(name);
+        title.setFill(Color.WHITE);
+        title.setFont(Font.font("Impact", 20));
+
+        Texture texture = texture(imageName);
+        texture.setFitWidth(140);
+        texture.setPreserveRatio(true);
+
+        Button actionBtn = new Button();
+        boolean ownsCar = profile.ownedCars.contains(imagePath);
+
+        if (profile.currentCar.equals(imagePath)) {
+            actionBtn.setText("SELECTED");
+            actionBtn.setDisable(true);
+            actionBtn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        } else if (ownsCar) {
+            actionBtn.setText("SELECT");
+            actionBtn.setOnAction(e -> {
+                profile.currentCar = imagePath;
+                profileManager.saveProfile(profile);
+                garageBox.getChildren().setAll(buildGarageMenu().getChildren());
+            });
+        } else {
+            actionBtn.setText("BUY: " + price);
+            actionBtn.setOnAction(e -> {
+                if (profile.cash >= price) {
+                    profile.cash -= price;
+                    profile.ownedCars.add(imagePath);
+                    profile.currentCar = imagePath;
+                    profileManager.saveProfile(profile);
+
+                    if (getApp() != null && getWorldProperties().exists("cash")) {
+                        set("cash", profile.cash);
+                    }
+
+                    garageBox.getChildren().setAll(buildGarageMenu().getChildren());
+                }
+            });
+        }
+
+        card.getChildren().addAll(title, texture, actionBtn);
+        return card;
+    }
+
+    private Button createMenuButton(String text, Runnable action) {
+        Button btn = new Button(text);
+        btn.setFont(Font.font("Arial", 24));
+        btn.setStyle("-fx-background-color: #333; -fx-text-fill: white; -fx-padding: 10 40 10 40;");
+        btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: #ff4500; -fx-text-fill: white;"));
+        btn.setOnMouseExited(e -> btn.setStyle("-fx-background-color: #333; -fx-text-fill: white;"));
+        btn.setOnAction(e -> action.run());
+        return btn;
     }
 }

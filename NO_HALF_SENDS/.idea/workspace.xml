@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="187f8558-589d-41a8-a176-f6b9e7a0059d" name="Changes" comment="files">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Chassis.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Intake.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Tires.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Transmission.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Turbo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/FXGL-21-Mai-2026-14.01.34.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/no_half_sends_save.json" beforeDir="false" afterPath="$PROJECT_DIR$/no_half_sends_save.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/components/DriftCarComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/components/DriftCarComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/data/PlayerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/data/PlayerProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/ui/DriftMainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/ui/DriftMainMenu.java" afterDir="false" />
+    <list default="true" id="187f8558-589d-41a8-a176-f6b9e7a0059d" name="Changes" comment="images über den cards">
+      <change beforePath="$PROJECT_DIR$/logs/FXGL-21-Mai-2026-14.22.29.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/NoHalfSendsApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/NoHalfSendsApp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +129,7 @@
       <workItem from="1779006710174" duration="4784000" />
       <workItem from="1779029789374" duration="1329000" />
       <workItem from="1779298127140" duration="11282000" />
-      <workItem from="1779364570804" duration="5716000" />
+      <workItem from="1779364570804" duration="5807000" />
     </task>
     <task id="LOCAL-00001" summary="PlayerProfile">
       <option name="closed" value="true" />
@@ -260,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779367641377</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="images über den cards">
+      <option name="closed" value="true" />
+      <created>1779370570694</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1779370570694</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,6 +292,7 @@
     <MESSAGE value="drift feeling optimiert und settings entfernt" />
     <MESSAGE value="map und border final + crash screen" />
     <MESSAGE value="files" />
-    <option name="LAST_COMMIT_MESSAGE" value="files" />
+    <MESSAGE value="images über den cards" />
+    <option name="LAST_COMMIT_MESSAGE" value="images über den cards" />
   </component>
 </project>
