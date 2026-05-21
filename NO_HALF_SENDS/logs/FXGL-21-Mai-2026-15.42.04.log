@@ -1,0 +1,534 @@
+15:38:56.784 [main                     ] DEBUG Logger               - Configured Logger
+15:38:56.792 [main                     ] DEBUG GameApplication      - Logging settings
+Title: NO HALF SENDS
+Version: 0.0
+Width: 1920
+Height: 1080
+Fullscreen: true
+Intro: false
+Profiling: false
+Single step:false
+App Mode: DEVELOPER
+Menu Key: ESCAPE
+Stage Style: DECORATED
+Scene Factory: class at.htl.no_half_sends.NoHalfSendsApp$1
+
+15:38:57.253 [JavaFX Application Thread] DEBUG FXGLApplication      - Initializing FXGL
+15:38:57.255 [JavaFX Application Thread] INFO  Engine               - FXGL-17.3 (30.03.2023 11.49) on WINDOWS (J:25.0.1 FX:21.0.6)
+15:38:57.255 [JavaFX Application Thread] DEBUG Engine               - JRE Vendor Name: Oracle Corporation
+15:38:57.255 [JavaFX Application Thread] DEBUG Engine               - Running on OS: Windows 11 version 10.0
+15:38:57.255 [JavaFX Application Thread] DEBUG Engine               - Architecture: amd64
+15:38:57.255 [JavaFX Application Thread] INFO  Engine               - Source code and latest versions at: https://github.com/AlmasB/FXGL
+15:38:57.255 [JavaFX Application Thread] INFO  Engine               -       Ask questions and discuss at: https://github.com/AlmasB/FXGL/discussions
+15:38:57.255 [JavaFX Application Thread] INFO  Engine               -              Join the FXGL chat at: https://gitter.im/AlmasB/FXGL
+15:38:57.331 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Creating a JavaFX scene
+15:38:57.368 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Target settings size: 1920.0 x 1080.0
+15:38:57.369 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled scene size:    1920.0 x 1080.0
+15:38:57.369 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled ratio: (1.0, 1.0)
+15:38:57.369 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Set initial scene to FXGLStartupScene
+15:38:57.372 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Opening main window
+15:38:57.434 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Window border size: (16.0, 39.0)
+15:38:57.434 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled size: 1920.0 x 1080.0
+15:38:57.435 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scaled ratio: (1.0, 1.0)
+15:38:57.435 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scene size: 1920.0 x 1080.0
+15:38:57.435 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Stage size: 1936.0 x 1119.0
+15:38:57.476 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Going fullscreen
+15:38:57.483 [FXGL Background Thread 1 ] DEBUG Engine               - Initializing environment variables
+15:38:57.522 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class at.htl.no_half_sends.NoHalfSendsApp
+15:38:57.522 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
+15:38:57.523 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/css/fxgl_dark.css
+15:38:57.553 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
+15:38:57.582 [FXGL Background Thread 1 ] DEBUG GameWorld            - Game world initialized
+15:38:57.613 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Physics world initialized: appHeight=1080, physics.ppm=50,0
+15:38:57.613 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Using strategy: BRUTE_FORCE
+15:38:57.616 [FXGL Background Thread 1 ] DEBUG GameScene            - Game scene initialized: 1920x1080
+15:38:57.677 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Turbo.png
+15:38:57.842 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Differential.png
+15:38:57.968 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Tires.png
+15:38:58.053 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Intake.png
+15:38:58.146 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Chassis.png
+15:38:58.242 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Transmission.png
+15:38:58.348 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Nissan_GTR_R35_mk4.png
+15:38:58.354 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Subaru_WRX_STI_mk2.png
+15:38:58.358 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Toyota_Supra_mk2.png
+15:38:58.360 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/textures/Ferarri_F12_mk2.png
+15:38:58.368 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Application scenes initialized
+15:38:58.377 [FXGL Background Thread 1 ] DEBUG SystemBundleService  - Loading FXGL system data
+15:38:58.380 [FXGL Background Thread 1 ] DEBUG FileSystemAccess     - Reading from: C:\Users\Clemis PC\Desktop\workspace\NO-HALF-SENDS\NO_HALF_SENDS\system\fxgl.bundle
+15:38:58.385 [FXGL Background Thread 1 ] DEBUG SystemBundleService  - Bundle FXGL: {}
+15:38:58.385 [FXGL Background Thread 1 ] DEBUG UpdaterService       - Checking for updates
+15:38:58.405 [FXGL Background Thread 4 ] DEBUG FXGLApplication      - Loading fonts
+15:38:58.405 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/VarelaRound-Regular.ttf
+15:38:58.405 [FXGL Background Thread 1 ] DEBUG FXGLApplication      - Loading default localization
+15:38:58.406 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/languages/english.lang
+15:38:58.415 [FXGL Background Thread 1 ] INFO  FXGLApplication      - FXGL initialization took: 0,932 sec
+15:38:58.421 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Gas geben - W
+15:38:58.421 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Bremsen / Rückwärts - S
+15:38:58.421 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Links lenken - A
+15:38:58.421 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Rechts lenken - D
+15:38:58.421 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Speichern - F5
+15:38:58.422 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/textures/fxgl_icon.png
+15:38:58.429 [JavaFX Application Thread] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/textures/fxgl_default_cursor.png
+15:38:58.429 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/Abel-Regular.ttf
+15:38:58.430 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Screenshot - CTRL+8
+15:38:58.431 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Dev Options - 1
+15:38:58.431 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Dev Console - 2
+15:38:58.431 [JavaFX Application Thread] DEBUG Input                - Registered new binding: System info dump - CTRL+9
+15:38:58.431 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Restart - CTRL+R
+15:38:58.432 [JavaFX Application Thread] DEBUG Input                - Registered new binding: Toggle Debug Camera - CTRL+7
+15:38:58.434 [JavaFX Application Thread] DEBUG LoopRunner           - Starting loop
+15:38:58.438 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/TerminalLandMono-Regular.otf
+15:38:58.445 [JavaFX Application Thread] DEBUG LoopRunner           - Initializing JavaFX AnimationTimerLoop
+15:38:58.447 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:38:58.451 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLStartupScene and adding to FXGLMainMenuDummyScene
+15:38:58.453 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/Clemis%20PC/.m2/repository/com/github/almasb/fxgl/17.3/fxgl-17.3.jar!/fxglassets/ui/fonts/Courier-Prime.ttf
+15:38:58.454 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLStartupScene -> FXGLMainMenuDummyScene
+15:38:58.454 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: DriftMainMenu
+15:38:58.454 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:38:58.468 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLMainMenuDummyScene and adding to DriftMainMenu
+15:38:58.469 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLMainMenuDummyScene -> DriftMainMenu
+15:38:58.606 [JavaFX Application Thread] DEBUG FXGLApplication      - Registering font factories with UI factory
+15:38:58.682 [FXGL Background Thread 2 ] INFO  UpdaterService       - Your current version:  17.3
+15:38:58.683 [FXGL Background Thread 2 ] INFO  UpdaterService       - Latest stable version: 25
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - Logging environment variables
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - achievements: []
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - actualHeight: 1440.0
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - actualHeightProperty: ReadOnlyDoubleProperty [value: 1440.0]
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - actualWidth: 2560.0
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - actualWidthProperty: ReadOnlyDoubleProperty [value: 2560.0]
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - appIcon: fxgl_icon.png
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - applicationMode: DEVELOPER
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - cSSList: [fxgl_dark.css]
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - collisionDetectionStrategy: BRUTE_FORCE
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - configClass: Optional.empty
+15:39:01.404 [FXGL Background Thread 3 ] DEBUG Engine               - credits: []
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - defaultCursor: CursorInfo(imageName=fxgl_default_cursor.png, hotspotX=7.0, hotspotY=6.0)
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - devBBoxColorProperty: ObjectProperty [value: 0xff0000ff]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - devEnableDebugCameraProperty: BooleanProperty [value: false]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - devSensorColorProperty: ObjectProperty [value: 0xffff00ff]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - devShowBBoxProperty: BooleanProperty [value: false]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - devShowPositionProperty: BooleanProperty [value: false]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - enabledMenuItems: []
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - engineServices: [class com.almasb.fxgl.app.services.FXGLAssetLoaderService, class com.almasb.fxgl.app.FXGLApplication$GameApplicationService, class com.almasb.fxgl.app.services.FXGLDialogService, class com.almasb.fxgl.app.services.IOTaskExecutorService, class com.almasb.fxgl.io.FileSystemService, class com.almasb.fxgl.localization.LocalizationService, class com.almasb.fxgl.app.services.SystemBundleService, class com.almasb.fxgl.profile.SaveLoadService, class com.almasb.fxgl.ui.FXGLUIFactoryServiceProvider, class com.almasb.fxgl.ui.FXGLDialogFactoryServiceProvider, class com.almasb.fxgl.audio.AudioPlayer, class com.almasb.fxgl.notification.impl.NotificationServiceProvider, class com.almasb.fxgl.achievement.AchievementService, class com.almasb.fxgl.cutscene.CutsceneService, class com.almasb.fxgl.minigames.MiniGameService, class com.almasb.fxgl.net.NetService, class com.almasb.fxgl.app.services.UpdaterService, class com.almasb.fxgl.dev.DevService]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - fontGame: Abel-Regular.ttf
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - fontMono: TerminalLandMono-Regular.otf
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - fontSizeScaleUI: 1.0
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - fontText: Courier-Prime.ttf
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - fontUI: VarelaRound-Regular.ttf
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - fullScreen: BooleanProperty [value: true]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - gameDifficulty: MEDIUM
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - gameDifficultyProperty: ObjectProperty [value: MEDIUM]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - globalMusicVolume: 0.5
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - globalMusicVolumeProperty: DoubleProperty [value: 0.5]
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - globalSoundVolume: 0.5
+15:39:01.405 [FXGL Background Thread 3 ] DEBUG Engine               - globalSoundVolumeProperty: DoubleProperty [value: 0.5]
+15:39:01.406 [FXGL Background Thread 3 ] DEBUG Engine               - height: 1080
+15:39:01.406 [FXGL Background Thread 3 ] DEBUG Engine               - is3D: false
+15:39:01.406 [FXGL Background Thread 3 ] DEBUG Engine               - isAndroid: false
+15:39:01.406 [FXGL Background Thread 3 ] DEBUG Engine               - isBrowser: false
+15:39:01.406 [FXGL Background Thread 3 ] DEBUG Engine               - isClickFeedbackEnabled: false
+15:39:01.406 [FXGL Background Thread 3 ] DEBUG Engine               - isCloseConfirmation: false
+15:39:01.406 [FXGL Background Thread 3 ] DEBUG Engine               - isDesktop: true
+15:39:01.407 [FXGL Background Thread 3 ] DEBUG Engine               - isDeveloperMenuEnabled: true
+15:39:01.407 [FXGL Background Thread 3 ] DEBUG Engine               - isEmbedded: false
+15:39:01.407 [FXGL Background Thread 3 ] DEBUG Engine               - isEntityPreloadEnabled: true
+15:39:01.407 [FXGL Background Thread 3 ] DEBUG Engine               - isExperimentalTiledLargeMap: false
+15:39:01.407 [FXGL Background Thread 3 ] DEBUG Engine               - isFileSystemWriteAllowed: true
+15:39:01.407 [FXGL Background Thread 3 ] DEBUG Engine               - isFullScreenAllowed: true
+15:39:01.407 [FXGL Background Thread 3 ] DEBUG Engine               - isFullScreenFromStart: true
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isGameMenuEnabled: true
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isIOS: false
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isIntroEnabled: false
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isLinux: false
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isMac: false
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isMainMenuEnabled: true
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isManualResizeEnabled: false
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isMobile: false
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isNative: false
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isPauseMusicWhenMinimized: true
+15:39:01.408 [FXGL Background Thread 3 ] DEBUG Engine               - isPreserveResizeRatio: false
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - isProfilingEnabled: false
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - isScaleAffectedOnResize: true
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - isSingleStep: false
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - isUserProfileEnabled: false
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - isWindows: true
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - language: ObjectProperty [value: ENGLISH]
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - menuKey: ESCAPE
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - mouseSensitivity: 0.2
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - notificationViewClass: class com.almasb.fxgl.notification.view.XboxNotificationView
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - pixelsPerMeter: 50.0
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - platform: WINDOWS
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - prefHeightProperty: ReadOnlyDoubleProperty [value: 1080.0]
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - prefWidthProperty: ReadOnlyDoubleProperty [value: 1920.0]
+15:39:01.409 [FXGL Background Thread 3 ] DEBUG Engine               - profileDir: profiles/
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - profileName: StringProperty [value: DEFAULT]
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - randomSeed: -1
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - runtimeInfo: RuntimeInfo(platform=WINDOWS, version=17.3, build=30.03.2023 11.49)
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - saveFileExt: sav
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - scaledHeightProp$fxgl: DoubleProperty [bound, value: 1440.0]
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - scaledWidthProp$fxgl: DoubleProperty [bound, value: 2560.0]
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - sceneFactory: at.htl.no_half_sends.NoHalfSendsApp$1@6ce0da90
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - secondsIn24h: 60
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - soundMenuBack: menu/back.wav
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - soundMenuPress: menu/press.wav
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - soundMenuSelect: menu/select.wav
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - soundNotification: core/notification.wav
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - stageStyle: DECORATED
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - supportedLanguages: [ENGLISH, FRENCH, GERMAN, HUNGARIAN, RUSSIAN]
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - ticksPerSecond: -1
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - title: NO HALF SENDS
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - urlGithub: https://github.com/AlmasB/FXGL
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - urlLeaderboard: http://fxgl-top.herokuapp.com/
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - urlPOM: https://raw.githubusercontent.com/AlmasB/FXGL/release/README.md
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - userAppClass: class at.htl.no_half_sends.NoHalfSendsApp
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - version: 0.0
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - versionCheckDays: 7
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - width: 1920
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - Logging services
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.FXGLAssetLoaderService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.FXGLApplication$GameApplicationService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.FXGLDialogService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.IOTaskExecutorService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.io.FileSystemService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.localization.LocalizationService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.SystemBundleService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.profile.SaveLoadService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.ui.FXGLUIFactoryServiceProvider
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.ui.FXGLDialogFactoryServiceProvider
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.audio.AudioPlayer
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.notification.impl.NotificationServiceProvider
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.achievement.AchievementService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.cutscene.CutsceneService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.minigames.MiniGameService
+15:39:01.410 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.net.NetService
+15:39:01.411 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.app.services.UpdaterService
+15:39:01.411 [FXGL Background Thread 3 ] DEBUG Engine               - class com.almasb.fxgl.dev.DevService
+15:39:15.932 [JavaFX Application Thread] DEBUG Menu                 - fireNewGame()
+15:39:15.932 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:39:15.933 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: DriftMainMenu
+15:39:15.933 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:15.933 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from DriftMainMenu and adding to FXGLMainMenuDummyScene
+15:39:15.934 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLMainMenuDummyScene <- DriftMainMenu
+15:39:15.934 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:15.937 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLMainMenuDummyScene and adding to FXGLLoadingScene
+15:39:15.937 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLMainMenuDummyScene -> FXGLLoadingScene
+15:39:15.937 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:39:15.937 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:39:15.937 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:39:15.937 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:39:15.938 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:39:15.954 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:39:15.962 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:39:15.963 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:39:15.965 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:39:15.970 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:39:15.980 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:39:15.994 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:39:15.995 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@1a0ff756
+15:39:16.000 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,061 sec
+15:39:16.000 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:16.003 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:39:16.004 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:39:32.109 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:39:32.109 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:32.110 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:39:32.110 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:39:41.570 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:39:41.570 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:41.570 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:39:41.570 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:39:41.570 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:39:41.570 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:41.572 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:39:41.572 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:39:41.572 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:39:41.572 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:39:41.572 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:39:41.575 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:39:41.575 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:39:41.576 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:39:41.578 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:39:41.578 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:39:41.579 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:39:41.581 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:39:41.586 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:39:41.591 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:39:41.591 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@7cf5443a
+15:39:41.600 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,025 sec
+15:39:41.600 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:41.603 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:39:41.605 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:39:50.453 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:39:50.453 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:50.453 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:39:50.453 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:39:53.971 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:39:53.971 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:53.972 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:39:53.972 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:39:53.972 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:39:53.972 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:53.973 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:39:53.974 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:39:53.974 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:39:53.974 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:39:53.974 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:39:53.975 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:39:53.975 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:39:53.976 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:39:53.977 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:39:53.977 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:39:53.978 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:39:53.979 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:39:53.989 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:39:53.992 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:39:53.993 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@141962a6
+15:39:54.002 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,027 sec
+15:39:54.002 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:39:54.004 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:39:54.005 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:40:06.796 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:40:06.796 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:06.797 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:40:06.797 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:40:10.051 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:40:10.051 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:10.051 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:40:10.052 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:40:10.052 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:40:10.052 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:10.053 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:40:10.053 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:40:10.053 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:40:10.053 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:40:10.053 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:40:10.054 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:40:10.054 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:40:10.055 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:40:10.057 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:40:10.057 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:40:10.057 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:40:10.058 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:40:10.063 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:40:10.068 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:40:10.068 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@6e7fc0df
+15:40:10.076 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,021 sec
+15:40:10.080 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:10.082 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:40:10.083 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:40:14.371 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:40:14.371 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:14.371 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:40:14.372 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:40:17.868 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:40:17.868 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:17.868 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:40:17.869 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:40:17.869 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:40:17.869 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:17.871 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:40:17.871 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:40:17.871 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:40:17.871 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:40:17.871 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:40:17.873 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:40:17.873 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:40:17.874 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:40:17.877 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:40:17.877 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:40:17.877 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:40:17.880 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:40:17.889 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:40:17.893 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:40:17.893 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@52962b11
+15:40:17.903 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,030 sec
+15:40:17.903 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:40:17.906 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:40:17.907 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:41:08.508 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:41:08.508 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:08.509 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:41:08.509 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:41:12.042 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:41:12.042 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:12.042 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:41:12.042 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:41:12.042 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:41:12.042 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:12.043 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:41:12.043 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:41:12.043 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:41:12.043 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:41:12.043 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:41:12.044 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:41:12.044 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:41:12.045 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:41:12.046 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:41:12.046 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:41:12.046 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:41:12.048 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:41:12.052 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:41:12.053 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:41:12.053 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@51d76607
+15:41:12.061 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,017 sec
+15:41:12.063 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:12.065 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:41:12.066 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:41:12.661 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: DriftMainMenu
+15:41:12.661 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:12.662 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to DriftMainMenu
+15:41:12.662 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> DriftMainMenu
+15:41:23.139 [JavaFX Application Thread] DEBUG Menu                 - fireNewGame()
+15:41:23.139 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:41:23.139 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: DriftMainMenu
+15:41:23.139 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:23.139 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from DriftMainMenu and adding to GameScene
+15:41:23.139 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- DriftMainMenu
+15:41:23.139 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:23.141 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:41:23.141 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:41:23.141 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:41:23.141 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:41:23.141 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:41:23.141 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:41:23.141 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:41:23.142 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:41:23.143 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:41:23.143 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:41:23.143 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:41:23.145 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:41:23.154 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:41:23.156 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:41:23.156 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@3de24613
+15:41:23.158 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,016 sec
+15:41:23.160 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:23.162 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:41:23.163 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:41:26.971 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:41:26.972 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:26.972 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:41:26.972 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:41:30.265 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:41:30.265 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:30.265 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:41:30.265 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:41:30.265 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:41:30.265 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:30.267 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:41:30.267 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:41:30.267 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:41:30.267 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:41:30.267 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:41:30.267 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:41:30.267 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:41:30.268 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:41:30.269 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:41:30.269 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:41:30.269 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:41:30.271 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:41:30.275 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:41:30.279 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:41:30.280 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@3844f0a6
+15:41:30.290 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,022 sec
+15:41:30.290 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:30.292 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:41:30.293 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:41:32.057 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:41:32.057 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:32.057 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:41:32.057 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:41:35.336 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:41:35.336 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:35.336 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:41:35.336 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:41:35.336 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:41:35.336 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:35.338 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:41:35.338 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:41:35.338 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:41:35.338 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:41:35.338 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:41:35.338 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:41:35.338 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:41:35.339 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:41:35.340 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:41:35.340 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:41:35.341 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:41:35.343 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:41:35.347 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:41:35.349 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:41:35.349 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@7e11bc2a
+15:41:35.356 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,018 sec
+15:41:35.356 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:35.358 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:41:35.359 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:41:47.324 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: ResetSubScene
+15:41:47.325 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:47.325 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to ResetSubScene
+15:41:47.325 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> ResetSubScene
+15:41:50.675 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: ResetSubScene
+15:41:50.675 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:50.675 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from ResetSubScene and adding to GameScene
+15:41:50.675 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- ResetSubScene
+15:41:50.675 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:41:50.675 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:50.677 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:41:50.677 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:41:50.677 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:41:50.677 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:41:50.677 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:41:50.677 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:41:50.677 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:41:50.678 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:41:50.679 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:41:50.679 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:41:50.679 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:41:50.681 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:41:50.685 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:41:50.686 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:41:50.686 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@456b2aec
+15:41:50.694 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,016 sec
+15:41:50.695 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:50.696 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:41:50.697 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:41:51.164 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: DriftMainMenu
+15:41:51.164 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:51.165 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to DriftMainMenu
+15:41:51.165 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> DriftMainMenu
+15:41:57.691 [JavaFX Application Thread] DEBUG Menu                 - fireNewGame()
+15:41:57.691 [JavaFX Application Thread] DEBUG GameApplicationServi - Starting new game
+15:41:57.691 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Pop state: DriftMainMenu
+15:41:57.691 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:57.691 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from DriftMainMenu and adding to GameScene
+15:41:57.691 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene <- DriftMainMenu
+15:41:57.691 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:57.693 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to FXGLLoadingScene
+15:41:57.693 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> FXGLLoadingScene
+15:41:57.693 [JavaFX Application Thread] DEBUG GameApplicationServi - Clearing previous game
+15:41:57.693 [JavaFX Application Thread] DEBUG GameScene            - Clearing game scene
+15:41:57.693 [JavaFX Application Thread] DEBUG GameWorld            - Clearing game world
+15:41:57.693 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
+15:41:57.693 [FXGL Background Thread 2 ] DEBUG FXGLApplication      - Initializing game
+15:41:57.695 [FXGL Background Thread 2 ] WARN  TMXLevelLoader       - TiledMap generated from 1.12.1. Supported version: 1.9.0. Some features may not be parsed fully.
+15:41:57.695 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Parsed TiledMap: file:/C:/Users/Clemis%20PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/target/classes/assets/levels/FinalMap.tmx
+15:41:57.695 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating tile layer entities
+15:41:57.695 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Loading view for layer Kachelebene 1
+15:41:57.697 [FXGL Background Thread 2 ] DEBUG TilesetLoader        - Created buffer with size 1280.0x1280.0
+15:41:57.701 [FXGL Background Thread 2 ] DEBUG TMXLevelLoader       - Creating object layer entities
+15:41:57.702 [FXGL Background Thread 2 ] DEBUG GameWorld            - Clearing removable entities
+15:41:57.702 [FXGL Background Thread 2 ] DEBUG GameWorld            - Setting level: com.almasb.fxgl.entity.level.Level@79070b0d
+15:41:57.703 [FXGL Background Thread 2 ] INFO  FXGLApplication      - Game initialization took: 0,010 sec
+15:41:57.707 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:57.708 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
+15:41:57.709 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - FXGLLoadingScene -> GameScene
+15:41:59.159 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Push state: DriftMainMenu
+15:41:59.159 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
+15:41:59.159 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from GameScene and adding to DriftMainMenu
+15:41:59.160 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - GameScene -> DriftMainMenu
+15:42:04.903 [JavaFX Application Thread] DEBUG FXGLApplication      - Exiting FXGL
+15:42:04.903 [JavaFX Application Thread] DEBUG LoopRunner           - Stopping loop
+15:42:04.903 [JavaFX Application Thread] DEBUG SystemBundleService  - Saving FXGL system data
+15:42:04.905 [JavaFX Application Thread] DEBUG FileSystemAccess     - Writing to: C:\Users\Clemis PC\Desktop\workspace\NO-HALF-SENDS\NO_HALF_SENDS\system\fxgl.bundle
+15:42:04.907 [JavaFX Application Thread] DEBUG Async                - Shutting down background threads
+15:42:04.907 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Closing main window
+15:42:04.925 [JavaFX Application Thread] DEBUG Logger               - Closing Logger
