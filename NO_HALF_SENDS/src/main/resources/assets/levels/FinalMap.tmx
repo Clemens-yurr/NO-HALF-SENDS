@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="99">
+ <tileset firstgid="1" name="Mymap" tilewidth="64" tileheight="64" tilecount="24" columns="8">
+  <image source="roads4W.png" width="512" height="192"/>
+ </tileset>
+ <tileset firstgid="25" name="Grasbert" tilewidth="64" tileheight="64" tilecount="49" columns="7">
+  <image source="Grasbert.png" width="511" height="511"/>
+ </tileset>
+ <layer id="1" name="Kachelebene 1" width="20" height="20">
+  <data encoding="csv">
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,
+45,45,45,9,3,3,3,3,3,3,10,45,45,45,45,45,45,45,45,45,
+45,45,45,12,10,45,45,45,45,9,11,45,45,9,10,45,45,45,45,45,
+45,45,45,9,11,45,45,9,10,12,1,2,3,11,4,45,45,45,45,45,
+45,45,45,12,3,3,3,17,15,45,45,45,45,45,4,45,45,45,45,45,
+45,45,45,45,45,45,45,16,11,45,45,45,45,45,4,45,45,45,45,45,
+45,45,45,45,45,45,9,11,45,45,45,45,45,45,4,45,45,45,45,45,
+45,45,45,45,45,9,11,45,45,45,45,45,45,45,4,45,45,45,45,45,
+45,45,45,45,45,12,3,3,3,3,3,3,10,45,4,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,9,15,45,4,45,45,45,45,45,
+45,45,45,45,45,45,9,3,3,3,3,13,11,45,12,10,45,45,45,45,
+45,45,45,45,45,9,11,45,45,45,45,9,3,10,9,11,45,45,45,45,
+45,45,45,45,45,12,3,3,3,1,2,11,45,12,11,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,
+45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45
+</data>
+ </layer>
+ <objectgroup id="3" name="Borders">
+  <object id="61" type="BORDER" x="328" y="633.333" width="374.333" height="69"/>
+  <object id="62" type="BORDER" x="443.5" y="768.5" width="262" height="63.5"/>
+  <object id="63" type="BORDER" x="830.5" y="312" width="64" height="455"/>
+  <object id="64" type="BORDER" x="566.5" y="312" width="260.5" height="268.5"/>
+  <object id="65" type="BORDER" x="308.5" y="187" width="269.5" height="77.5"/>
+  <object id="66" type="BORDER" x="138.667" y="68.6667" width="856" height="67.3333"/>
+  <object id="67" type="BORDER" x="698.667" y="142" width="137.333" height="110"/>
+  <object id="69" type="BORDER" x="951.333" y="136" width="88.6667" height="572"/>
+  <object id="70" type="BORDER" x="764.667" y="829.333" width="66.6667" height="47.3333"/>
+  <object id="71" type="BORDER" x="340" y="893.333" width="704" height="60.6667"/>
+  <object id="72" type="BORDER" x="1008" y="712" width="27.3333" height="184"/>
+  <object id="73" type="BORDER" x="279.333" y="694.667" width="51.3333" height="202.667"/>
+  <object id="74" type="BORDER" x="137.333" y="128.667" width="57.3333" height="291.333"/>
+  <object id="75" type="BORDER" x="203.333" y="376" width="242.667" height="75.3333"/>
+  <object id="79" type="BORDER" x="547.333" y="450">
+   <polygon points="0,0 -136,124 4,125.333"/>
+  </object>
+  <object id="80" type="BORDER" x="232.667" y="452.667" width="92" height="232.667"/>
+  <object id="81" type="BORDER" x="314" y="270.5" width="135" height="53.5"/>
+  <object id="82" type="BORDER" x="709" y="762.5" width="114" height="12.5"/>
+  <object id="83" type="BORDER" x="908.5" y="757" width="61" height="18"/>
+  <object id="84" type="BORDER" x="890" y="784.5" width="10.5" height="56.5"/>
+  <object id="85" type="BORDER" x="379" y="826.5" width="53.5" height="9"/>
+  <object id="86" type="BORDER" x="334" y="460" width="56" height="58"/>
+  <object id="87" type="BORDER" x="505.333" y="377.667" width="12.6667" height="15.6667"/>
+  <object id="88" type="BORDER" x="503.333" y="313" width="17" height="15.3333"/>
+  <object id="89" type="BORDER" x="763.333" y="697.667" width="9.66667" height="13.3333"/>
+  <object id="90" type="BORDER" x="711.333" y="636.667" width="65.3333" height="15"/>
+  <object id="92" type="BORDER" x="627.333" y="247" width="35.6667" height="17"/>
+  <object id="93" type="BORDER" x="588.5" y="186.5" width="54" height="12"/>
+  <object id="94" type="BORDER" x="246.5" y="183" width="47" height="19.5"/>
+  <object id="95" type="BORDER" x="248" y="312" width="52" height="16"/>
+  <object id="96" type="BORDER" x="887.5" y="247" width="15.5" height="51.5"/>
+  <object id="97" type="BORDER" x="846.667" y="151.333" width="80.6667" height="43.3333"/>
+  <object id="98" type="BORDER" x="952.182" y="825.818" width="44.1818" height="56.9091"/>
+ </objectgroup>
+</map>
