@@ -22,7 +22,7 @@ public class DriftCarComponent extends Component {
     private double drag = 0.995;
 
     // Erhöht, damit der Tacho trotz niedrigerer Engine-Werte coole Km/H anzeigt
-    private double speedMultiplier = 2.2;
+    private double speedMultiplier = 4.4;
 
     private Point2D velocity = Point2D.ZERO;
     public boolean up, down, left, right;

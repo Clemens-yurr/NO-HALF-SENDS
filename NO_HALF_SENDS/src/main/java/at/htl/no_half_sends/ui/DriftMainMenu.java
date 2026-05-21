@@ -4,6 +4,7 @@ import at.htl.no_half_sends.data.PlayerProfile;
 import at.htl.no_half_sends.data.ProfileManager;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
+import com.almasb.fxgl.texture.Texture;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -45,7 +46,6 @@ public class DriftMainMenu extends FXGLMenu {
         Button btnGarage = createMenuButton("CARS", () -> showMenu(garageBox));
         Button btnExit = createMenuButton("EXIT", () -> getGameController().exit());
 
-        // btnSettings wurde hier aus der Liste entfernt
         mainBox = new VBox(20, title, btnPlay, btnUpgrades, btnGarage, btnExit);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setTranslateX(getAppWidth() / 2.0 - 200);
@@ -86,16 +86,16 @@ public class DriftMainMenu extends FXGLMenu {
         cashText.setFill(Color.LIGHTGREEN);
 
         HBox row1 = new HBox(20,
-                createUpgradeCard("Turbo", profile.turboLevel, "turbo"),
-                createUpgradeCard("Differential", profile.differentialLevel, "diff"),
-                createUpgradeCard("Tires", profile.tiresLevel, "tires")
+                createUpgradeCard("Turbo", profile.turboLevel, "turbo", "Turbo.png"),
+                createUpgradeCard("Differential", profile.differentialLevel, "diff", "Differential.png"),
+                createUpgradeCard("Tires", profile.tiresLevel, "tires", "Tires.png")
         );
         row1.setAlignment(Pos.CENTER);
 
         HBox row2 = new HBox(20,
-                createUpgradeCard("Intake", profile.intakeLevel, "intake"),
-                createUpgradeCard("Chassis", profile.chassisLevel, "chassis"),
-                createUpgradeCard("Transmission", profile.transmissionLevel, "trans")
+                createUpgradeCard("Intake", profile.intakeLevel, "intake", "Intake.png"),
+                createUpgradeCard("Chassis", profile.chassisLevel, "chassis", "Chassis.png"),
+                createUpgradeCard("Transmission", profile.transmissionLevel, "trans", "Transmission.png")
         );
         row2.setAlignment(Pos.CENTER);
 
@@ -104,19 +104,22 @@ public class DriftMainMenu extends FXGLMenu {
         VBox box = new VBox(30, title, cashText, row1, row2, btnBack);
         box.setAlignment(Pos.CENTER);
         box.setTranslateX(getAppWidth() / 2.0 - 450);
-        box.setTranslateY(150);
+        box.setTranslateY(100);
         return box;
     }
 
-    private VBox createUpgradeCard(String name, int currentLevel, String type) {
+    private VBox createUpgradeCard(String name, int currentLevel, String type, String imageName) {
         VBox card = new VBox(10);
         card.setAlignment(Pos.CENTER);
-        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 20;");
-        card.setPrefSize(250, 250);
+        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 15;");
+        card.setPrefSize(250, 290); // Höhe leicht erhöht für das Bild
 
         Text title = new Text(name);
         title.setFill(Color.WHITE);
         title.setFont(Font.font("Impact", 24));
+
+        // FXGL Texture-Loader lädt das Bild direkt aus assets/textures/ und skaliert es auf 70x70 Pixel
+        Texture texture = texture(imageName, 70, 70);
 
         Text levelText = new Text("Level: " + currentLevel + " / 5");
         levelText.setFill(Color.LIGHTGRAY);
@@ -131,7 +134,8 @@ public class DriftMainMenu extends FXGLMenu {
             buyBtn.setOnAction(e -> handleUpgradeBuy(type, currentLevel, cost));
         }
 
-        card.getChildren().addAll(title, levelText, buyBtn);
+        // Texture wurde hier in die addAll-Liste hinzugefügt!
+        card.getChildren().addAll(title, texture, levelText, buyBtn);
         return card;
     }
 
@@ -163,10 +167,10 @@ public class DriftMainMenu extends FXGLMenu {
         title.setFill(Color.WHITE);
 
         HBox carList = new HBox(20,
-                createCarCard("Nissan GTR", "Nissan_GTR_R35_mk4.png", 0),
-                createCarCard("Subaru WRX", "Subaru_WRX_STI_mk2.png", 20000),
-                createCarCard("Toyota Supra", "Toyota_Supra_mk2.png", 50000),
-                createCarCard("Ferrari F12", "Ferarri_F12_mk2.png", 100000)
+                createCarCard("Nissan GTR", "Nissan_GTR_R35_mk4.png", 0, "Nissan_GTR_R35_mk4.png"),
+                createCarCard("Subaru WRX", "Subaru_WRX_STI_mk2.png", 20000, "Subaru_WRX_STI_mk2.png"),
+                createCarCard("Toyota Supra", "Toyota_Supra_mk2.png", 35000, "Toyota_Supra_mk2.png"),
+                createCarCard("Ferrari F12", "Ferarri_F12_mk2.png", 65000, "Ferarri_F12_mk2.png")
         );
         carList.setAlignment(Pos.CENTER);
 
@@ -179,15 +183,20 @@ public class DriftMainMenu extends FXGLMenu {
         return box;
     }
 
-    private VBox createCarCard(String name, String imagePath, int price) {
+    private VBox createCarCard(String name, String imagePath, int price, String imageName) {
         VBox card = new VBox(15);
         card.setAlignment(Pos.CENTER);
-        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 20;");
-        card.setPrefSize(250, 300);
+        card.setStyle("-fx-background-color: #222; -fx-border-color: #555; -fx-border-width: 2; -fx-padding: 15;");
+        card.setPrefSize(260, 340); // Größe angepasst, damit das Auto schön Platz hat
 
         Text title = new Text(name);
         title.setFill(Color.WHITE);
         title.setFont(Font.font("Impact", 20));
+
+        // Lädt die Auto-Textur und passt sie für die UI-Card an (z.B. Breite 140, Höhe behalten via Seitenverhältnis)
+        Texture texture = texture(imageName);
+        texture.setFitWidth(140);
+        texture.setPreserveRatio(true);
 
         Button actionBtn = new Button();
         boolean ownsCar = profile.ownedCars.contains(imagePath);
@@ -221,7 +230,8 @@ public class DriftMainMenu extends FXGLMenu {
             });
         }
 
-        card.getChildren().addAll(title, actionBtn);
+        // Texture wurde hier in die addAll-Liste hinzugefügt!
+        card.getChildren().addAll(title, texture, actionBtn);
         return card;
     }
 

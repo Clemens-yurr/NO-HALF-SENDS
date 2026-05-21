@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PlayerProfile {
     // 1 MILLION DOLLAR ZUM TESTEN!
-    public int cash = 200;
+    public int cash = 0;
     public int highestScore = 0;
 
     // Alles auf 0 zurückgesetzt

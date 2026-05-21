@@ -1,13 +1,13 @@
 {
-  "cash": 20041,
+  "cash": 25558,
   "highestScore": 0,
   "turboLevel": 0,
   "differentialLevel": 0,
-  "tiresLevel": 0,
+  "tiresLevel": 1,
   "intakeLevel": 0,
   "chassisLevel": 0,
   "transmissionLevel": 0,
-  "currentCar": "Subaru_WRX_STI_mk2.png",
+  "currentCar": "Nissan_GTR_R35_mk4.png",
   "ownedCars": [
     "Nissan_GTR_R35_mk4.png",
     "Subaru_WRX_STI_mk2.png"

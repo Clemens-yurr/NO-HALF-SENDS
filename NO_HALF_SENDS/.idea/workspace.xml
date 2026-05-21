@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="187f8558-589d-41a8-a176-f6b9e7a0059d" name="Changes" comment="drift feeling optimiert und settings entfernt">
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/ui/GameEntityFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/ui/GameType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/ui/ResetSubScene.java" afterDir="false" />
+    <list default="true" id="187f8558-589d-41a8-a176-f6b9e7a0059d" name="Changes" comment="files">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Chassis.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Intake.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Tires.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Transmission.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/textures/Turbo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/NoHalfSendsApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/NoHalfSendsApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/levels/nohalfsends.tiled-session" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/levels/nohalfsends.tiled-session" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/FXGL-21-Mai-2026-14.01.34.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/no_half_sends_save.json" beforeDir="false" afterPath="$PROJECT_DIR$/no_half_sends_save.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/components/DriftCarComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/components/DriftCarComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/data/PlayerProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/data/PlayerProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/ui/DriftMainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/htl/no_half_sends/ui/DriftMainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,34 +64,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.NoHalfSendsApp.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Clemis PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.NoHalfSendsApp.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Clemis PC/Desktop/workspace/NO-HALF-SENDS/NO_HALF_SENDS/src/main/resources/assets/textures",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Clemis PC\Desktop\workspace\NO-HALF-SENDS\NO_HALF_SENDS\src\main\resources\assets\textures" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Clemis PC\Desktop\workspace\NO-HALF-SENDS\NO_HALF_SENDS\src\main\resources\assets\textures" />
       <recent name="C:\Users\Clemis PC\Desktop\workspace\NO-HALF-SENDS\NO_HALF_SENDS\src\main\resources\assets\levels" />
     </key>
   </component>
@@ -129,7 +138,7 @@
       <workItem from="1779006710174" duration="4784000" />
       <workItem from="1779029789374" duration="1329000" />
       <workItem from="1779298127140" duration="11282000" />
-      <workItem from="1779364570804" duration="2691000" />
+      <workItem from="1779364570804" duration="5716000" />
     </task>
     <task id="LOCAL-00001" summary="PlayerProfile">
       <option name="closed" value="true" />
@@ -235,7 +244,23 @@
       <option name="project" value="LOCAL" />
       <updated>1779314730576</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="map und border final + crash screen">
+      <option name="closed" value="true" />
+      <created>1779367608878</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1779367608878</updated>
+    </task>
+    <task id="LOCAL-00015" summary="files">
+      <option name="closed" value="true" />
+      <created>1779367641377</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1779367641377</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +291,8 @@
     <MESSAGE value="pictures cars mk2" />
     <MESSAGE value="finalö map and border and drift changes" />
     <MESSAGE value="drift feeling optimiert und settings entfernt" />
-    <option name="LAST_COMMIT_MESSAGE" value="drift feeling optimiert und settings entfernt" />
+    <MESSAGE value="map und border final + crash screen" />
+    <MESSAGE value="files" />
+    <option name="LAST_COMMIT_MESSAGE" value="files" />
   </component>
 </project>
